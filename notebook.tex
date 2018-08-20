@@ -1,0 +1,1317 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{High\_Cr\_figures}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \hypertarget{current-set-of-high-cr-plots}{%
+\section{Current set of High-Cr\#
+plots}\label{current-set-of-high-cr-plots}}
+
+    Suzanne Birner, August 2018
+
+    \hypertarget{the-plots-that-are-included-in-my-thesis-appendix}{%
+\subsection{The plots that are included in my thesis
+appendix}\label{the-plots-that-are-included-in-my-thesis-appendix}}
+
+    These first two plots are included in Appendix B of my thesis and show
+the raw major element data-- Cr\#, TiO\(_2\) content in spinel,
+\(f_{O2}\), etc. The first plot shows all the sample groups (Bryndzia
+and Wood, 1990; SWIR; veined SWIR, Gakkel, and Hess Deep), while the
+second plot shows only SWIR samples (including veined SWIR). This second
+plot is color-coded by the amount of plagioclase evident in thin
+section/hand sample, with higher amounts of plagioclase represented by
+redder samples and lower amounts represented by bluer samples.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}186}]:} \PY{n}{fig\PYZus{}all\PYZus{}major} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+          \PY{n}{fig\PYZus{}all\PYZus{}major}\PY{o}{.}\PY{n}{set\PYZus{}size\PYZus{}inches}\PY{p}{(}\PY{l+m+mi}{6}\PY{p}{,} \PY{l+m+mi}{9}\PY{p}{)}
+          
+          \PY{n}{matplotlib}\PY{o}{.}\PY{n}{rc}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{font}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{l+m+mi}{9}\PY{p}{)}
+          
+          \PY{n}{ax0} \PY{o}{=} \PY{n}{fig\PYZus{}all\PYZus{}major}\PY{o}{.}\PY{n}{add\PYZus{}axes}\PY{p}{(}\PY{p}{[}\PY{l+m+mf}{0.05}\PY{p}{,} \PY{l+m+mf}{0.75}\PY{p}{,} \PY{l+m+mf}{0.35}\PY{p}{,} \PY{l+m+mf}{0.2}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{} left, bottom, width, height (range 0 to 1)}
+          \PY{n}{ax1} \PY{o}{=} \PY{n}{fig\PYZus{}all\PYZus{}major}\PY{o}{.}\PY{n}{add\PYZus{}axes}\PY{p}{(}\PY{p}{[}\PY{l+m+mf}{0.55}\PY{p}{,} \PY{l+m+mf}{0.75}\PY{p}{,} \PY{l+m+mf}{0.35}\PY{p}{,} \PY{l+m+mf}{0.2}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{} left, bottom, width, height (range 0 to 1)}
+          \PY{n}{ax2} \PY{o}{=} \PY{n}{fig\PYZus{}all\PYZus{}major}\PY{o}{.}\PY{n}{add\PYZus{}axes}\PY{p}{(}\PY{p}{[}\PY{l+m+mf}{0.05}\PY{p}{,} \PY{l+m+mf}{0.5}\PY{p}{,} \PY{l+m+mf}{0.35}\PY{p}{,} \PY{l+m+mf}{0.2}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{} left, bottom, width, height (range 0 to 1)}
+          \PY{n}{ax3} \PY{o}{=} \PY{n}{fig\PYZus{}all\PYZus{}major}\PY{o}{.}\PY{n}{add\PYZus{}axes}\PY{p}{(}\PY{p}{[}\PY{l+m+mf}{0.55}\PY{p}{,} \PY{l+m+mf}{0.5}\PY{p}{,} \PY{l+m+mf}{0.35}\PY{p}{,} \PY{l+m+mf}{0.2}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{} left, bottom, width, height (range 0 to 1)}
+          \PY{n}{ax4} \PY{o}{=} \PY{n}{fig\PYZus{}all\PYZus{}major}\PY{o}{.}\PY{n}{add\PYZus{}axes}\PY{p}{(}\PY{p}{[}\PY{l+m+mf}{0.05}\PY{p}{,} \PY{l+m+mf}{0.25}\PY{p}{,} \PY{l+m+mf}{0.35}\PY{p}{,} \PY{l+m+mf}{0.2}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{} left, bottom, width, height (range 0 to 1)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{gca}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{invert\PYZus{}xaxis}\PY{p}{(}\PY{p}{)}
+          \PY{n}{ax5} \PY{o}{=} \PY{n}{fig\PYZus{}all\PYZus{}major}\PY{o}{.}\PY{n}{add\PYZus{}axes}\PY{p}{(}\PY{p}{[}\PY{l+m+mf}{0.55}\PY{p}{,} \PY{l+m+mf}{0.25}\PY{p}{,} \PY{l+m+mf}{0.35}\PY{p}{,} \PY{l+m+mf}{0.2}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{} left, bottom, width, height (range 0 to 1)}
+          \PY{n}{ax6} \PY{o}{=} \PY{n}{fig\PYZus{}all\PYZus{}major}\PY{o}{.}\PY{n}{add\PYZus{}axes}\PY{p}{(}\PY{p}{[}\PY{l+m+mf}{0.05}\PY{p}{,} \PY{l+m+mf}{0.}\PY{p}{,} \PY{l+m+mf}{0.35}\PY{p}{,} \PY{l+m+mf}{0.2}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{} left, bottom, width, height (range 0 to 1)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{gca}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{invert\PYZus{}xaxis}\PY{p}{(}\PY{p}{)}
+          \PY{n}{ax7} \PY{o}{=} \PY{n}{fig\PYZus{}all\PYZus{}major}\PY{o}{.}\PY{n}{add\PYZus{}axes}\PY{p}{(}\PY{p}{[}\PY{l+m+mf}{0.55}\PY{p}{,} \PY{l+m+mf}{0.0}\PY{p}{,} \PY{l+m+mf}{0.35}\PY{p}{,} \PY{l+m+mf}{0.2}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{} left, bottom, width, height (range 0 to 1)}
+          
+          \PY{n}{locations} \PY{o}{=} \PY{p}{[}\PY{n}{BW}\PY{p}{,}\PY{n}{SW}\PY{p}{,}\PY{n}{Gk}\PY{p}{,}\PY{n}{HD}\PY{p}{,}\PY{n}{SW78}\PY{p}{]}
+          \PY{n}{labels} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Bryndzia and Wood}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SWIR}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Gakkel}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Hess Deep}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{veined SWIR}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n}{symbols} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{o}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{d}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{o}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{o}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{d}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n}{sizes} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{15}\PY{p}{,}\PY{l+m+mi}{50}\PY{p}{,}\PY{l+m+mi}{50}\PY{p}{,}\PY{l+m+mi}{50}\PY{p}{,}\PY{l+m+mi}{50}\PY{p}{]}
+          \PY{n}{facecolors} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{silver}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{SW}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{D}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{plag}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lightgreen}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{yellow}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{darkred}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n}{edgecolors} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{silver}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{black}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{black}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{black}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{black}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          
+          \PY{n}{fO2\PYZus{}plot}\PY{p}{(}\PY{n}{ax0}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cr\PYZsh{} (spl)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Fe\PYZdl{}\PYZca{}}\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{3+\PYZcb{}\PYZdl{}/\PYZdl{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{Sigma\PYZdl{}Fe (spl)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{locations}\PY{p}{,}\PY{n}{sizes}\PY{p}{,}\PY{n}{facecolors}\PY{p}{,}\PY{n}{edgecolors}\PY{p}{)}
+          \PY{n}{fO2\PYZus{}plot}\PY{p}{(}\PY{n}{ax1}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cr\PYZsh{} (spl)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}log(f\PYZus{}}\PY{l+s+si}{\PYZob{}O2\PYZcb{}}\PY{l+s+s1}{)\PYZdl{}, \PYZdl{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{Delta\PYZdl{}QFM}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{locations}\PY{p}{,}\PY{n}{sizes}\PY{p}{,}\PY{n}{facecolors}\PY{p}{,}\PY{n}{edgecolors}\PY{p}{)}
+          \PY{n}{fO2\PYZus{}plot}\PY{p}{(}\PY{n}{ax2}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cr\PYZsh{} (spl)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{wt}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{ TiO\PYZdl{}\PYZus{}2\PYZdl{} (spl)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{locations}\PY{p}{,}\PY{n}{sizes}\PY{p}{,}\PY{n}{facecolors}\PY{p}{,}\PY{n}{edgecolors}\PY{p}{)}
+          \PY{n}{fO2\PYZus{}plot}\PY{p}{(}\PY{n}{ax3}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cr\PYZsh{} (spl)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{T (°C)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{locations}\PY{p}{,}\PY{n}{sizes}\PY{p}{,}\PY{n}{facecolors}\PY{p}{,}\PY{n}{edgecolors}\PY{p}{)}
+          \PY{n}{fO2\PYZus{}plot}\PY{p}{(}\PY{n}{ax4}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mg\PYZsh{} (spl)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cr\PYZsh{} (spl)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{locations}\PY{p}{,}\PY{n}{sizes}\PY{p}{,}\PY{n}{facecolors}\PY{p}{,}\PY{n}{edgecolors}\PY{p}{)}
+          \PY{n}{fO2\PYZus{}plot}\PY{p}{(}\PY{n}{ax5}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Fo\PYZsh{} (olv)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}X\PYZus{}}\PY{l+s+si}{\PYZob{}Fe\PYZcb{}}\PY{l+s+s1}{\PYZca{}}\PY{l+s+si}{\PYZob{}M1\PYZcb{}}\PY{l+s+s1}{*X\PYZus{}}\PY{l+s+si}{\PYZob{}Fe\PYZcb{}}\PY{l+s+s1}{\PYZca{}}\PY{l+s+si}{\PYZob{}M2\PYZcb{}}\PY{l+s+s1}{\PYZdl{} (opx)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{locations}\PY{p}{,}\PY{n}{sizes}\PY{p}{,}\PY{n}{facecolors}\PY{p}{,}\PY{n}{edgecolors}\PY{p}{)}
+          \PY{n}{fO2\PYZus{}plot}\PY{p}{(}\PY{n}{ax6}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Fo\PYZsh{} (olv)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cr\PYZsh{} (spl)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{locations}\PY{p}{,}\PY{n}{sizes}\PY{p}{,}\PY{n}{facecolors}\PY{p}{,}\PY{n}{edgecolors}\PY{p}{)}
+          \PY{n}{fO2\PYZus{}plot}\PY{p}{(}\PY{n}{ax7}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cr\PYZsh{} (spl)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{wt}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{ NiO (spl)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{locations}\PY{p}{,}\PY{n}{sizes}\PY{p}{,}\PY{n}{facecolors}\PY{p}{,}\PY{n}{edgecolors}\PY{p}{)}
+          
+          \PY{n}{ax1}\PY{o}{.}\PY{n}{set\PYZus{}ylim}\PY{p}{(}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{)}
+          \PY{n}{ax5}\PY{o}{.}\PY{n}{set\PYZus{}ylim}\PY{p}{(}\PY{p}{[}\PY{l+m+mf}{0.002}\PY{p}{,}\PY{l+m+mf}{0.014}\PY{p}{]}\PY{p}{)}
+          \PY{n}{ax2}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{8}\PY{p}{)}
+          
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_4_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}187}]:} \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+          \PY{n}{fig}\PY{o}{.}\PY{n}{set\PYZus{}size\PYZus{}inches}\PY{p}{(}\PY{l+m+mi}{6}\PY{p}{,} \PY{l+m+mi}{9}\PY{p}{)}
+          
+          \PY{n}{matplotlib}\PY{o}{.}\PY{n}{rc}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{font}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{l+m+mi}{9}\PY{p}{)}
+          
+          \PY{n}{ax0} \PY{o}{=} \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}axes}\PY{p}{(}\PY{p}{[}\PY{l+m+mf}{0.05}\PY{p}{,} \PY{l+m+mf}{0.75}\PY{p}{,} \PY{l+m+mf}{0.35}\PY{p}{,} \PY{l+m+mf}{0.2}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{} left, bottom, width, height (range 0 to 1)}
+          \PY{n}{ax1} \PY{o}{=} \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}axes}\PY{p}{(}\PY{p}{[}\PY{l+m+mf}{0.55}\PY{p}{,} \PY{l+m+mf}{0.75}\PY{p}{,} \PY{l+m+mf}{0.35}\PY{p}{,} \PY{l+m+mf}{0.2}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{} left, bottom, width, height (range 0 to 1)}
+          \PY{n}{ax2} \PY{o}{=} \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}axes}\PY{p}{(}\PY{p}{[}\PY{l+m+mf}{0.05}\PY{p}{,} \PY{l+m+mf}{0.5}\PY{p}{,} \PY{l+m+mf}{0.35}\PY{p}{,} \PY{l+m+mf}{0.2}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{} left, bottom, width, height (range 0 to 1)}
+          \PY{n}{ax3} \PY{o}{=} \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}axes}\PY{p}{(}\PY{p}{[}\PY{l+m+mf}{0.55}\PY{p}{,} \PY{l+m+mf}{0.5}\PY{p}{,} \PY{l+m+mf}{0.35}\PY{p}{,} \PY{l+m+mf}{0.2}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{} left, bottom, width, height (range 0 to 1)}
+          \PY{n}{ax4} \PY{o}{=} \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}axes}\PY{p}{(}\PY{p}{[}\PY{l+m+mf}{0.05}\PY{p}{,} \PY{l+m+mf}{0.25}\PY{p}{,} \PY{l+m+mf}{0.35}\PY{p}{,} \PY{l+m+mf}{0.2}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{} left, bottom, width, height (range 0 to 1)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{gca}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{invert\PYZus{}xaxis}\PY{p}{(}\PY{p}{)}
+          \PY{n}{ax5} \PY{o}{=} \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}axes}\PY{p}{(}\PY{p}{[}\PY{l+m+mf}{0.55}\PY{p}{,} \PY{l+m+mf}{0.25}\PY{p}{,} \PY{l+m+mf}{0.35}\PY{p}{,} \PY{l+m+mf}{0.2}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{} left, bottom, width, height (range 0 to 1)}
+          \PY{n}{ax6} \PY{o}{=} \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}axes}\PY{p}{(}\PY{p}{[}\PY{l+m+mf}{0.05}\PY{p}{,} \PY{l+m+mf}{0.}\PY{p}{,} \PY{l+m+mf}{0.35}\PY{p}{,} \PY{l+m+mf}{0.2}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{} left, bottom, width, height (range 0 to 1)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{gca}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{invert\PYZus{}xaxis}\PY{p}{(}\PY{p}{)}
+          \PY{n}{ax7} \PY{o}{=} \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}axes}\PY{p}{(}\PY{p}{[}\PY{l+m+mf}{0.55}\PY{p}{,} \PY{l+m+mf}{0.0}\PY{p}{,} \PY{l+m+mf}{0.35}\PY{p}{,} \PY{l+m+mf}{0.2}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{} left, bottom, width, height (range 0 to 1)}
+          
+          \PY{n}{symbols} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{d}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{d}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n}{locations} \PY{o}{=} \PY{p}{[}\PY{n}{SW}\PY{p}{,}\PY{n}{SW78}\PY{p}{]}
+          \PY{n}{sizes} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{50}\PY{p}{,}\PY{l+m+mi}{50}\PY{p}{]}
+          \PY{n}{facecolors} \PY{o}{=} \PY{p}{[}\PY{n}{SW}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{D}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{plag}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{darkred}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} 
+          \PY{n}{edgecolors} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{black}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{black}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          
+          \PY{n}{fO2\PYZus{}plot}\PY{p}{(}\PY{n}{ax0}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cr\PYZsh{} (spl)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Fe\PYZdl{}\PYZca{}}\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{3+\PYZcb{}\PYZdl{}/\PYZdl{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{Sigma\PYZdl{}Fe (spl)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{locations}\PY{p}{,}\PY{n}{sizes}\PY{p}{,}\PY{n}{facecolors}\PY{p}{,}\PY{n}{edgecolors}\PY{p}{)}
+          \PY{n}{fO2\PYZus{}plot}\PY{p}{(}\PY{n}{ax1}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cr\PYZsh{} (spl)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}log(f\PYZus{}}\PY{l+s+si}{\PYZob{}O2\PYZcb{}}\PY{l+s+s1}{)\PYZdl{}, \PYZdl{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{Delta\PYZdl{}QFM}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{locations}\PY{p}{,}\PY{n}{sizes}\PY{p}{,}\PY{n}{facecolors}\PY{p}{,}\PY{n}{edgecolors}\PY{p}{)}
+          \PY{n}{fO2\PYZus{}plot}\PY{p}{(}\PY{n}{ax2}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cr\PYZsh{} (spl)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{wt}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{ TiO\PYZdl{}\PYZus{}2\PYZdl{} (spl)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{locations}\PY{p}{,}\PY{n}{sizes}\PY{p}{,}\PY{n}{facecolors}\PY{p}{,}\PY{n}{edgecolors}\PY{p}{)}
+          \PY{n}{fO2\PYZus{}plot}\PY{p}{(}\PY{n}{ax3}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cr\PYZsh{} (spl)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{T (°C)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{locations}\PY{p}{,}\PY{n}{sizes}\PY{p}{,}\PY{n}{facecolors}\PY{p}{,}\PY{n}{edgecolors}\PY{p}{)}
+          \PY{n}{fO2\PYZus{}plot}\PY{p}{(}\PY{n}{ax4}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mg\PYZsh{} (spl)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cr\PYZsh{} (spl)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{locations}\PY{p}{,}\PY{n}{sizes}\PY{p}{,}\PY{n}{facecolors}\PY{p}{,}\PY{n}{edgecolors}\PY{p}{)}
+          \PY{n}{fO2\PYZus{}plot}\PY{p}{(}\PY{n}{ax5}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Fo\PYZsh{} (olv)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}X\PYZus{}}\PY{l+s+si}{\PYZob{}Fe\PYZcb{}}\PY{l+s+s1}{\PYZca{}}\PY{l+s+si}{\PYZob{}M1\PYZcb{}}\PY{l+s+s1}{*X\PYZus{}}\PY{l+s+si}{\PYZob{}Fe\PYZcb{}}\PY{l+s+s1}{\PYZca{}}\PY{l+s+si}{\PYZob{}M2\PYZcb{}}\PY{l+s+s1}{\PYZdl{} (opx)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{locations}\PY{p}{,}\PY{n}{sizes}\PY{p}{,}\PY{n}{facecolors}\PY{p}{,}\PY{n}{edgecolors}\PY{p}{)}
+          \PY{n}{fO2\PYZus{}plot}\PY{p}{(}\PY{n}{ax6}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Fo\PYZsh{} (olv)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cr\PYZsh{} (spl)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{locations}\PY{p}{,}\PY{n}{sizes}\PY{p}{,}\PY{n}{facecolors}\PY{p}{,}\PY{n}{edgecolors}\PY{p}{)}
+          \PY{n}{fO2\PYZus{}plot}\PY{p}{(}\PY{n}{ax7}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cr\PYZsh{} (spl)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{wt}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{ NiO (spl)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{locations}\PY{p}{,}\PY{n}{sizes}\PY{p}{,}\PY{n}{facecolors}\PY{p}{,}\PY{n}{edgecolors}\PY{p}{)}
+          
+          \PY{n}{ax1}\PY{o}{.}\PY{n}{set\PYZus{}ylim}\PY{p}{(}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{)}
+          \PY{n}{ax5}\PY{o}{.}\PY{n}{set\PYZus{}ylim}\PY{p}{(}\PY{p}{[}\PY{l+m+mf}{0.002}\PY{p}{,}\PY{l+m+mf}{0.014}\PY{p}{]}\PY{p}{)}
+          
+          \PY{n}{plt}\PY{o}{.}\PY{n}{savefig}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{hiCr\PYZus{}plots\PYZus{}plag.eps}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n+nb}{format}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{eps}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{bbox\PYZus{}inches}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{tight}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_5_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{new-trace-element-plots-for-swir-samples}{%
+\subsection{New-- trace element plots for SWIR
+samples}\label{new-trace-element-plots-for-swir-samples}}
+
+    \hypertarget{categorization-of-swir-trace-element-samples}{%
+\subsubsection{Categorization of SWIR trace element
+samples}\label{categorization-of-swir-trace-element-samples}}
+
+    The SWIR trace element samples are categorized based on their oxygen
+fugacity and their Cr\#. The four categories are defined as follows:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Low Cr\#:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \(Cr\# < 30\)
+  \end{itemize}
+\item
+  High Cr\#, High fO2:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \(Cr\# > 30\)
+  \item
+    \(\log(f_{O2})_{\Delta QFM} > +0.7)\)
+  \end{itemize}
+\item
+  High Cr\#, Low fO2:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \(Cr\# > 30\)\\
+  \item
+    \(\log(f_{O2})_{\Delta QFM} < -0.2)\)
+  \end{itemize}
+\item
+  Uncategorized:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \(Cr\# > 30\)
+  \item
+    \(-0.2 < \log(f_{O2})_{\Delta QFM} < +0.7)\)
+  \end{itemize}
+\end{enumerate}
+
+The 23 samples for which I have trace element data are plotted below,
+colored according to their categorization.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{c+c1}{\PYZsh{}\PYZsh{} Plot categorizations \PYZsh{}\PYZsh{}\PYZsh{}}
+         
+         \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+         \PY{n}{fig}\PY{o}{.}\PY{n}{set\PYZus{}size\PYZus{}inches}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{)}
+             
+         \PY{c+c1}{\PYZsh{}ax0 = fig.add\PYZus{}axes([0.05, 0.1, 0.4, 0.8]) \PYZsh{} left, bottom, width, height (range 0 to 1)}
+         \PY{c+c1}{\PYZsh{}ax1 = fig.add\PYZus{}axes([0.55, 0.1, 0.4, 0.8]) \PYZsh{} left, bottom, width, height (range 0 to 1)}
+         \PY{n}{ax1} \PY{o}{=} \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}axes}\PY{p}{(}\PY{p}{[}\PY{l+m+mf}{0.55}\PY{p}{,} \PY{l+m+mf}{0.1}\PY{p}{,} \PY{l+m+mf}{0.8}\PY{p}{,} \PY{l+m+mf}{0.8}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{} left, bottom, width, height (range 0 to 1)}
+         
+         \PY{c+c1}{\PYZsh{}ax0.scatter(Cr\PYZus{}num[low\PYZus{}Cr], fO2[low\PYZus{}Cr], color=\PYZsq{}k\PYZsq{})}
+         \PY{c+c1}{\PYZsh{}ax0.scatter(Cr\PYZus{}num[hi\PYZus{}Cr\PYZus{}hi\PYZus{}fO2], fO2[hi\PYZus{}Cr\PYZus{}hi\PYZus{}fO2], color=\PYZsq{}r\PYZsq{})}
+         \PY{c+c1}{\PYZsh{}ax0.scatter(Cr\PYZus{}num[hi\PYZus{}Cr\PYZus{}low\PYZus{}fO2], fO2[hi\PYZus{}Cr\PYZus{}low\PYZus{}fO2], color=\PYZsq{}b\PYZsq{})}
+         \PY{c+c1}{\PYZsh{}ax0.scatter(Cr\PYZus{}num[no\PYZus{}cat], fO2[no\PYZus{}cat], color=\PYZsq{}purple\PYZsq{})}
+         \PY{c+c1}{\PYZsh{}ax0.scatter(Cr\PYZus{}num\PYZus{}SWplag, fO2\PYZus{}SWplag, color=\PYZsq{}maroon\PYZsq{})}
+         
+         \PY{c+c1}{\PYZsh{}ax0.plot([30,60],[\PYZhy{}0.2,\PYZhy{}0.2], color=\PYZsq{}k\PYZsq{}, linestyle=\PYZsq{}\PYZhy{}\PYZhy{}\PYZsq{})}
+         \PY{c+c1}{\PYZsh{}ax0.plot([30,60],[0.7,0.7], color=\PYZsq{}k\PYZsq{}, linestyle=\PYZsq{}\PYZhy{}\PYZhy{}\PYZsq{})}
+         \PY{c+c1}{\PYZsh{}ax0.axvline(30, color=\PYZsq{}k\PYZsq{}, linestyle=\PYZsq{}\PYZhy{}\PYZhy{}\PYZsq{})}
+         
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{Cr\PYZus{}num}\PY{p}{[}\PY{n}{low\PYZus{}Cr} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{trace}\PY{o}{==}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}\PY{p}{,} \PY{n}{fO2}\PY{p}{[}\PY{n}{low\PYZus{}Cr} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{trace}\PY{o}{==}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{k}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{Cr\PYZus{}num}\PY{p}{[}\PY{n}{hi\PYZus{}Cr\PYZus{}hi\PYZus{}fO2} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{trace}\PY{o}{==}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}\PY{p}{,} \PY{n}{fO2}\PY{p}{[}\PY{n}{hi\PYZus{}Cr\PYZus{}hi\PYZus{}fO2} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{trace}\PY{o}{==}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{Cr\PYZus{}num}\PY{p}{[}\PY{n}{hi\PYZus{}Cr\PYZus{}low\PYZus{}fO2} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{trace}\PY{o}{==}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}\PY{p}{,} \PY{n}{fO2}\PY{p}{[}\PY{n}{hi\PYZus{}Cr\PYZus{}low\PYZus{}fO2} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{trace}\PY{o}{==}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{Cr\PYZus{}num}\PY{p}{[}\PY{n}{no\PYZus{}cat} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{trace}\PY{o}{==}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}\PY{p}{,} \PY{n}{fO2}\PY{p}{[}\PY{n}{no\PYZus{}cat} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{trace}\PY{o}{==}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{purple}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}ax1.scatter(Cr\PYZus{}num\PYZus{}SWplag[trace\PYZus{}SWplag==1], fO2\PYZus{}SWplag[trace\PYZus{}SWplag==1], color=\PYZsq{}maroon\PYZsq{})}
+         
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{30}\PY{p}{,}\PY{l+m+mi}{60}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.2}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.2}\PY{p}{]}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{k}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{linestyle}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{30}\PY{p}{,}\PY{l+m+mi}{60}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{l+m+mf}{0.7}\PY{p}{,}\PY{l+m+mf}{0.7}\PY{p}{]}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{k}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{linestyle}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{axvline}\PY{p}{(}\PY{l+m+mi}{30}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{k}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{linestyle}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         
+         
+         \PY{c+c1}{\PYZsh{}ax0.set\PYZus{}xlim([0,60])}
+         \PY{c+c1}{\PYZsh{}ax0.set\PYZus{}ylim([\PYZhy{}2,2])}
+         
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{set\PYZus{}xlim}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{60}\PY{p}{]}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{set\PYZus{}ylim}\PY{p}{(}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{set\PYZus{}yticks}\PY{p}{(}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{set\PYZus{}yticklabels}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{0}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{+1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{+2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Spinel Cr\PYZsh{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{log(f\PYZus{}}\PY{l+s+si}{\PYZob{}O2\PYZcb{}}\PY{l+s+s1}{)\PYZdl{},\PYZdl{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{Delta\PYZdl{}QFM}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_9_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Next, I plot the clinopyroxene trace element patterns, colored by group
+number. Note that the high Cr\#, low fO2 samples do not contain
+clinopyroxene and so are not shown on these plots.
+
+We can see that the groups have different trace element patterns, both
+in terms of REEs and the extended trace element suite
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{category} \PY{o}{=} \PY{p}{[}\PY{p}{]} 
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{SW}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+             \PY{k}{if} \PY{n}{low\PYZus{}Cr}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{k+kc}{True}\PY{p}{:}
+                 \PY{n}{category}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}
+             \PY{k}{elif} \PY{n}{hi\PYZus{}Cr\PYZus{}hi\PYZus{}fO2}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{k+kc}{True}\PY{p}{:}
+                 \PY{n}{category}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}
+             \PY{k}{elif} \PY{n}{hi\PYZus{}Cr\PYZus{}low\PYZus{}fO2}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{k+kc}{True}\PY{p}{:}
+                 \PY{n}{category}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}
+             \PY{k}{else}\PY{p}{:}
+                 \PY{n}{category}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}
+         
+         \PY{n}{cat\PYZus{}names} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Low Cr\PYZsh{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{High Cr\PYZsh{}, high fO2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{High Cr\PYZsh{}, low fO2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Uncategorized}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         
+         \PY{n}{REE\PYZus{}plot}\PY{p}{(}\PY{n}{cpx\PYZus{}adjusted\PYZus{}dicts}\PY{p}{,} \PY{n}{category}\PY{p}{,} \PY{p}{\PYZob{}}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{k}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{purple}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cpx REEs}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{extended\PYZus{}REE\PYZus{}plot}\PY{p}{(}\PY{n}{cpx\PYZus{}adjusted\PYZus{}dicts}\PY{p}{,} \PY{n}{category}\PY{p}{,} \PY{p}{\PYZob{}}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{k}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{purple}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cpx Extended REEs}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{trace\PYZus{}plot}\PY{p}{(}\PY{n}{cpx\PYZus{}adjusted\PYZus{}dicts}\PY{p}{,} \PY{n}{category}\PY{p}{,} \PY{p}{\PYZob{}}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{k}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{purple}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cpx Full Trace Elements}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}extended\PYZus{}REE\PYZus{}plot(cpx\PYZus{}trace\PYZus{}dicts\PYZus{}SWplag, np.zeros(len(cpx\PYZus{}trace\PYZus{}dicts\PYZus{}SWplag)), \PYZob{}0:\PYZsq{}maroon\PYZsq{}\PYZcb{}, \PYZsq{}Van78 Plag Samples\PYZsq{})}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_11_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_11_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_11_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    We can compare the trace element data to major element to see that these
+groups of samples define different behavior in both major and trace
+element systems. Plotting Yb vs Cr\# (both proxies for degree of partial
+melting) demonstrates that the low Cr\# samples (in black) fall within
+the global ridge peridotite array (in gray), while the high Cr\#/high
+fO2 samples fall off the trend, to higher Cr\# for a given Yb value. The
+high Cr\#/high fO2 samples also record high TiO\(_2\) in spinel and
+evident plagioclase in hand sample and/or thin section.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}37}]:} \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+         \PY{n}{fig}\PY{o}{.}\PY{n}{set\PYZus{}size\PYZus{}inches}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{8}\PY{p}{)}
+             
+         \PY{n}{ax0} \PY{o}{=} \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}axes}\PY{p}{(}\PY{p}{[}\PY{l+m+mf}{0.05}\PY{p}{,} \PY{l+m+mf}{0.60}\PY{p}{,} \PY{l+m+mf}{0.8}\PY{p}{,} \PY{l+m+mf}{0.25}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{} left, bottom, width, height (range 0 to 1)}
+         \PY{n}{ax1} \PY{o}{=} \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}axes}\PY{p}{(}\PY{p}{[}\PY{l+m+mf}{0.05}\PY{p}{,} \PY{l+m+mf}{0.35}\PY{p}{,} \PY{l+m+mf}{0.8}\PY{p}{,} \PY{l+m+mf}{0.25}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{} left, bottom, width, height (range 0 to 1)}
+         \PY{n}{ax2} \PY{o}{=} \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}axes}\PY{p}{(}\PY{p}{[}\PY{l+m+mf}{0.05}\PY{p}{,} \PY{l+m+mf}{0.1}\PY{p}{,} \PY{l+m+mf}{0.8}\PY{p}{,} \PY{l+m+mf}{0.25}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{} left, bottom, width, height (range 0 to 1)}
+         
+         \PY{c+c1}{\PYZsh{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+         \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} Yb vs Cr \PYZsh{}\PYZsh{}\PYZsh{}}
+         
+         \PY{n}{ax0}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{Cr\PYZus{}global}\PY{p}{,} \PY{n}{Yb\PYZus{}global}\PY{p}{,} \PY{n}{s}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{silver}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n}{ax0}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{Cr\PYZus{}num}\PY{p}{[}\PY{n}{low\PYZus{}Cr}\PY{p}{]}\PY{p}{,} \PY{n}{Yb}\PY{p}{[}\PY{n}{low\PYZus{}Cr}\PY{p}{]}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{k}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax0}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{Cr\PYZus{}num}\PY{p}{[}\PY{n}{hi\PYZus{}Cr\PYZus{}hi\PYZus{}fO2}\PY{p}{]}\PY{p}{,} \PY{n}{Yb}\PY{p}{[}\PY{n}{hi\PYZus{}Cr\PYZus{}hi\PYZus{}fO2}\PY{p}{]}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax0}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{Cr\PYZus{}num}\PY{p}{[}\PY{n}{hi\PYZus{}Cr\PYZus{}low\PYZus{}fO2}\PY{p}{]}\PY{p}{,} \PY{n}{Yb}\PY{p}{[}\PY{n}{hi\PYZus{}Cr\PYZus{}low\PYZus{}fO2}\PY{p}{]}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax0}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{Cr\PYZus{}num}\PY{p}{[}\PY{n}{no\PYZus{}cat}\PY{p}{]}\PY{p}{,} \PY{n}{Yb}\PY{p}{[}\PY{n}{no\PYZus{}cat}\PY{p}{]}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{purple}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}ax0.scatter(Cr\PYZus{}num\PYZus{}SWplag, Yb\PYZus{}SWplag, color=\PYZsq{}maroon\PYZsq{})}
+         
+         \PY{n}{ax0}\PY{o}{.}\PY{n}{set\PYZus{}xlim}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{60}\PY{p}{]}\PY{p}{)}
+         \PY{n}{ax0}\PY{o}{.}\PY{n}{set\PYZus{}ylim}\PY{p}{(}\PY{p}{[}\PY{l+m+mf}{10e\PYZhy{}2}\PY{p}{,}\PY{l+m+mf}{2.5}\PY{o}{*}\PY{l+m+mf}{10e\PYZhy{}1}\PY{p}{]}\PY{p}{)}
+         \PY{n}{ax0}\PY{o}{.}\PY{n}{set\PYZus{}xticklabels}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{ax0}\PY{o}{.}\PY{n}{set\PYZus{}yscale}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{log}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax0}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Yb (ppm) in Cpx}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+         \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} TiO2 vs Cr \PYZsh{}\PYZsh{}\PYZsh{}}
+         
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{Cr\PYZus{}global}\PY{p}{,} \PY{n}{TiO2\PYZus{}global}\PY{p}{,} \PY{n}{s}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{silver}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{Cr\PYZus{}num}\PY{p}{[}\PY{n}{low\PYZus{}Cr} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{trace}\PY{o}{==}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}\PY{p}{,} \PY{n}{TiO2}\PY{p}{[}\PY{n}{low\PYZus{}Cr} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{trace}\PY{o}{==}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{k}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{Cr\PYZus{}num}\PY{p}{[}\PY{n}{hi\PYZus{}Cr\PYZus{}hi\PYZus{}fO2} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{trace}\PY{o}{==}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}\PY{p}{,} \PY{n}{TiO2}\PY{p}{[}\PY{n}{hi\PYZus{}Cr\PYZus{}hi\PYZus{}fO2} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{trace}\PY{o}{==}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}ax1.scatter(Cr\PYZus{}num[hi\PYZus{}Cr\PYZus{}low\PYZus{}fO2 \PYZam{} (trace==1)], TiO2[hi\PYZus{}Cr\PYZus{}low\PYZus{}fO2 \PYZam{} (trace==1)], color=\PYZsq{}b\PYZsq{})}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{Cr\PYZus{}num}\PY{p}{[}\PY{n}{no\PYZus{}cat} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{trace}\PY{o}{==}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}\PY{p}{,} \PY{n}{TiO2}\PY{p}{[}\PY{n}{no\PYZus{}cat} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{trace}\PY{o}{==}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{purple}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}ax1.scatter(Cr\PYZus{}num\PYZus{}SWplag[trace\PYZus{}SWplag==1], TiO2\PYZus{}SWplag[trace\PYZus{}SWplag==1], color=\PYZsq{}maroon\PYZsq{})}
+         
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{set\PYZus{}xlim}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{60}\PY{p}{]}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{set\PYZus{}ylim}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{set\PYZus{}xticklabels}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{set\PYZus{}yticks}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mf}{0.2}\PY{p}{,}\PY{l+m+mf}{0.4}\PY{p}{,}\PY{l+m+mf}{0.6}\PY{p}{,}\PY{l+m+mf}{0.8}\PY{p}{]}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{TiO\PYZdl{}\PYZus{}2\PYZdl{} (wt}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{) in Spinel}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{labelpad}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+         \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} Plag vs Cr \PYZsh{}\PYZsh{}\PYZsh{}}
+         
+         \PY{n}{ax2}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{Cr\PYZus{}num}\PY{p}{[}\PY{n}{low\PYZus{}Cr} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{trace}\PY{o}{==}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}\PY{p}{,} \PY{n}{plag\PYZus{}score}\PY{p}{[}\PY{n}{low\PYZus{}Cr} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{trace}\PY{o}{==}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{k}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax2}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{Cr\PYZus{}num}\PY{p}{[}\PY{n}{hi\PYZus{}Cr\PYZus{}hi\PYZus{}fO2} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{trace}\PY{o}{==}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}\PY{p}{,} \PY{n}{plag\PYZus{}score}\PY{p}{[}\PY{n}{hi\PYZus{}Cr\PYZus{}hi\PYZus{}fO2} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{trace}\PY{o}{==}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}ax2.scatter(Cr\PYZus{}num[hi\PYZus{}Cr\PYZus{}low\PYZus{}fO2 \PYZam{} (trace==1)], plag\PYZus{}score[hi\PYZus{}Cr\PYZus{}low\PYZus{}fO2 \PYZam{} (trace==1)], color=\PYZsq{}b\PYZsq{})}
+         \PY{n}{ax2}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{Cr\PYZus{}num}\PY{p}{[}\PY{n}{no\PYZus{}cat} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{trace}\PY{o}{==}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}\PY{p}{,} \PY{n}{plag\PYZus{}score}\PY{p}{[}\PY{n}{no\PYZus{}cat} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{trace}\PY{o}{==}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{purple}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}ax2.scatter(Cr\PYZus{}num\PYZus{}SWplag[trace\PYZus{}SWplag==1], plag\PYZus{}score\PYZus{}SWplag[trace\PYZus{}SWplag==1], color=\PYZsq{}maroon\PYZsq{})}
+         
+         \PY{n}{ax2}\PY{o}{.}\PY{n}{set\PYZus{}xlim}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{60}\PY{p}{]}\PY{p}{)}
+         \PY{n}{ax2}\PY{o}{.}\PY{n}{set\PYZus{}ylim}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{]}\PY{p}{)}
+         \PY{n}{ax2}\PY{o}{.}\PY{n}{set\PYZus{}yticks}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{]}\PY{p}{)}
+         \PY{n}{ax2}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cr\PYZsh{} in Spinel}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax2}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Qualitative Plag. Score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{labelpad}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{)}
+         
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_13_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{modeling-of-swir-clinopyroxene-trace-element-samples}{%
+\subsubsection{Modeling of SWIR clinopyroxene trace element
+samples}\label{modeling-of-swir-clinopyroxene-trace-element-samples}}
+
+In order to model the SWIR trace elements, I had to make a few changes
+from the method used in Birner et al., 2017.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Because we ran into issues with Pb and Nb in that work, and because I
+  was similarly running into issues here, I excluded them from the
+  extended trace element suite. Now, the included FMEs are Ba and Sr,
+  while the included HFSEs are Zr, Ti, and Y.
+\item
+  I added plagioclase to the melt addition modeling. This essentially
+  involved adding in plagioclase partition coefficients (I used
+  plag/melt D values from Aigner-Torres et al., 2007) and letting
+  plagioclase be a phase that can crystallize during melt addition.
+\item
+  I added in a spinel--\textgreater{}plagioclase reaction that is
+  facilitated by melt addition. The reason I added this is because, if
+  our hypothesis is that spinel Cr\# is being increased due to
+  plagioclase preferentially drawing Al from spinel, then the modal
+  abundance of spinel needs to decrease (because Al is a major element).
+  I am modeling this as a logarithmic function, such that the rate of
+  spinel loss slows as more melt is added.
+\item
+  Currently the best fit is based only on the REEs-- if I try to find a
+  best fit for the whole pattern, the REEs end up slightly
+  underestimated.
+\end{enumerate}
+
+Currently, the parameters used are as follows: * composition of melt
+being added to peridotite residue: NMORB (Gale et al., 2013) * crystal
+modes being crystallized in: 45\% Plag, 26\% Cpx, 12\% Opx, 7\% Olv, 1\%
+Spl (approximate values for MORB crystallizing @ 900 C and 3 MPa,
+estimated using Phase Plot) * amount of spinel-\textgreater{}plagioclase
+reaction for the rock to undergo: \(0.0025*\log(100m + 1) + 0.002\),
+where m is the amount of melt addition. The coefficients were chosen to
+best model the measured Cr\#s of the peridotites.
+
+A plot showing the amount of spinel-\textgreater{}plagioclase reaction
+undergone, as a function of melt addition, is shown below:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}172}]:} \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+          \PY{n}{fig}\PY{o}{.}\PY{n}{set\PYZus{}size\PYZus{}inches}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{)}
+          \PY{n}{ax0} \PY{o}{=} \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}axes}\PY{p}{(}\PY{p}{[}\PY{l+m+mf}{0.1}\PY{p}{,} \PY{l+m+mf}{0.8}\PY{p}{,} \PY{l+m+mf}{0.8}\PY{p}{,} \PY{l+m+mf}{0.8}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{} left, bottom, width, height (range 0 to 1)}
+          
+          \PY{n}{x}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{)}
+          \PY{n}{y} \PY{o}{=} \PY{l+m+mi}{100}\PY{o}{*}\PY{l+m+mf}{0.0025}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{x}\PY{o}{*}\PY{l+m+mi}{100} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)} \PY{o}{+} \PY{l+m+mf}{0.002}
+          
+          \PY{n}{ax0}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{y}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gray}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{linewidth}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+          
+          \PY{n}{ax0}\PY{o}{.}\PY{n}{set\PYZus{}xlim}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+          \PY{n}{ax0}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{ melt addition}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{ax0}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{amount of spl\PYZhy{}plg reaction}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{(g spl lost per 100 g rock)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_15_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    The modeled fits for both the Low Cr\# and the High Cr\#, High fO2
+groups are shown below. Thin colored lines are the data, while thicker
+gray lines are the modeled fits.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}254}]:} \PY{n}{plag} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{olv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{opx}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cpx}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{spl}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{plg}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mi}{1}\PY{p}{\PYZcb{}}
+          \PY{n}{MORB} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{olv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mi}{7}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{opx}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mi}{12}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cpx}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mi}{26}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{spl}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{plg}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mi}{45}\PY{p}{\PYZcb{}} \PY{c+c1}{\PYZsh{} WEIGHT modes calculated from PhasePlot @900C and 310 MPa}
+          \PY{c+c1}{\PYZsh{}half = \PYZob{}\PYZsq{}olv\PYZsq{}:0, \PYZsq{}opx\PYZsq{}:0, \PYZsq{}cpx\PYZsq{}:0.584, \PYZsq{}spl\PYZsq{}:0, \PYZsq{}plg\PYZsq{}:0.416\PYZcb{}}
+          
+          \PY{n}{rx7} \PY{o}{=} \PY{p}{[}\PY{l+m+mf}{0.0025}\PY{p}{,}\PY{l+m+mf}{0.002}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{]} \PY{c+c1}{\PYZsh{} not bad! nothing too crazy!}
+          
+          \PY{c+c1}{\PYZsh{} \PYZti{}2 seconds per sample in fast mode}
+          \PY{c+c1}{\PYZsh{} \PYZti{}10 seconds per sample in slow mode}
+          \PY{n}{F\PYZus{}lowCr}\PY{p}{,} \PY{n}{Fm\PYZus{}lowCr}\PY{p}{,} \PY{n}{Cr\PYZus{}res\PYZus{}lowCr}\PY{p}{,} \PY{n}{Cr\PYZus{}new\PYZus{}lowCr} \PY{o}{=} \PY{n}{melt\PYZus{}model}\PY{p}{(}\PY{n}{low\PYZus{}Cr\PYZus{}dicts}\PY{p}{,} \PY{n}{NMORB}\PY{p}{,} \PY{n}{xtal\PYZus{}modes}\PY{o}{=}\PY{n}{MORB}\PY{p}{,} \PY{n}{normalization}\PY{o}{=}\PY{n}{PUM}\PY{p}{,} 
+                                                              \PY{n}{method}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{custom1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{subsolidus\PYZus{}reaction} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{spinel\PYZhy{}to\PYZhy{}plag}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                                                                     \PY{n}{ss\PYZus{}rxn\PYZus{}amt}\PY{o}{=}\PY{n}{rx7}\PY{p}{,} \PY{n}{group\PYZus{}color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{k}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{plot\PYZus{}title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Low Cr\PYZsh{} Samples}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                                                           \PY{n}{output}\PY{o}{=}\PY{k+kc}{False}\PY{p}{,} \PY{n}{model\PYZus{}plot}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{individual}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{speed}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fast}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          \PY{n}{F\PYZus{}hiCr}\PY{p}{,} \PY{n}{Fm\PYZus{}hiCr}\PY{p}{,} \PY{n}{Cr\PYZus{}res\PYZus{}hiCr}\PY{p}{,} \PY{n}{Cr\PYZus{}new\PYZus{}hiCr} \PY{o}{=} \PY{n}{melt\PYZus{}model}\PY{p}{(}\PY{n}{hi\PYZus{}Cr\PYZus{}hi\PYZus{}fO2\PYZus{}dicts}\PY{p}{,} \PY{n}{NMORB}\PY{p}{,} \PY{n}{xtal\PYZus{}modes}\PY{o}{=}\PY{n}{MORB}\PY{p}{,} \PY{n}{normalization}\PY{o}{=}\PY{n}{PUM}\PY{p}{,} 
+                                                        \PY{n}{method}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{custom1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{subsolidus\PYZus{}reaction} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{spinel\PYZhy{}to\PYZhy{}plag}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ss\PYZus{}rxn\PYZus{}amt}\PY{o}{=}\PY{n}{rx7}\PY{p}{,}
+                                                               \PY{n}{group\PYZus{}color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{plot\PYZus{}title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{High Cr\PYZsh{} Samples}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                                                   \PY{n}{output}\PY{o}{=}\PY{k+kc}{False}\PY{p}{,} \PY{n}{model\PYZus{}plot}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{individual}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{speed}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fast}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_17_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_17_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    This model allows us to then look at geochemical parameters as a
+function of degree of melt addition. We can see in (a) that the majority
+of samples have undergone \textasciitilde{}5-10\% fractional melting,
+however the low Cr\# samples have undergone almost no melt addition,
+whereas the high Cr\# samples have undergone higher degrees of melt
+addition, up to \textasciitilde{}1\%. We can also see that high degrees
+of melt addition are correlated with increased TiO\(_2\) content in
+spinel (panel b), evident plagioclase (panel c), increased Cr\# in
+spinel (panel d), and \(f_{O2}\) towards the high end of the SWIR array
+(panel e).
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}268}]:} \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+          \PY{n}{fig}\PY{o}{.}\PY{n}{set\PYZus{}size\PYZus{}inches}\PY{p}{(}\PY{l+m+mf}{3.5}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{)}
+              
+          \PY{n}{y}\PY{o}{=}\PY{l+m+mf}{0.18}
+          \PY{n}{ax0} \PY{o}{=} \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}axes}\PY{p}{(}\PY{p}{[}\PY{l+m+mf}{0.05}\PY{p}{,} \PY{l+m+mf}{0.1}\PY{o}{+}\PY{l+m+mi}{4}\PY{o}{*}\PY{n}{y}\PY{p}{,} \PY{l+m+mf}{0.8}\PY{p}{,} \PY{n}{y}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{} left, bottom, width, height (range 0 to 1)}
+          \PY{n}{ax1} \PY{o}{=} \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}axes}\PY{p}{(}\PY{p}{[}\PY{l+m+mf}{0.05}\PY{p}{,} \PY{l+m+mf}{0.1}\PY{o}{+}\PY{l+m+mi}{3}\PY{o}{*}\PY{n}{y}\PY{p}{,} \PY{l+m+mf}{0.8}\PY{p}{,} \PY{n}{y}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{} left, bottom, width, height (range 0 to 1)}
+          \PY{n}{ax2} \PY{o}{=} \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}axes}\PY{p}{(}\PY{p}{[}\PY{l+m+mf}{0.05}\PY{p}{,} \PY{l+m+mf}{0.1}\PY{o}{+}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{y}\PY{p}{,} \PY{l+m+mf}{0.8}\PY{p}{,} \PY{n}{y}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{} left, bottom, width, height (range 0 to 1)}
+          \PY{n}{ax3} \PY{o}{=} \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}axes}\PY{p}{(}\PY{p}{[}\PY{l+m+mf}{0.05}\PY{p}{,} \PY{l+m+mf}{0.1}\PY{o}{+}\PY{n}{y}\PY{p}{,} \PY{l+m+mf}{0.8}\PY{p}{,} \PY{n}{y}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{} left, bottom, width, height (range 0 to 1)}
+          \PY{n}{ax4} \PY{o}{=} \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}axes}\PY{p}{(}\PY{p}{[}\PY{l+m+mf}{0.05}\PY{p}{,} \PY{l+m+mf}{0.1}\PY{p}{,} \PY{l+m+mf}{0.8}\PY{p}{,} \PY{n}{y}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{} left, bottom, width, height (range 0 to 1)}
+          
+          \PY{n}{xmax} \PY{o}{=} \PY{n+nb}{max}\PY{p}{(}\PY{n}{Fm\PYZus{}hiCr} \PY{o}{+} \PY{l+m+mf}{0.1}\PY{p}{)}
+          
+          
+          \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} Fractional Melting \PYZsh{}\PYZsh{}\PYZsh{}}
+          \PY{n}{ax0}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{Fm\PYZus{}lowCr}\PY{p}{,} \PY{n}{F\PYZus{}lowCr}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{k}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{ax0}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{Fm\PYZus{}hiCr}\PY{p}{,} \PY{n}{F\PYZus{}hiCr}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          \PY{n}{ax0}\PY{o}{.}\PY{n}{set\PYZus{}xlim}\PY{p}{(}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.1}\PY{p}{,}\PY{n}{xmax}\PY{p}{]}\PY{p}{)}
+          \PY{n}{ax0}\PY{o}{.}\PY{n}{set\PYZus{}ylim}\PY{p}{(}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.5}\PY{p}{,}\PY{l+m+mi}{20}\PY{p}{]}\PY{p}{)}
+          \PY{n}{ax0}\PY{o}{.}\PY{n}{set\PYZus{}xticks}\PY{p}{(}\PY{p}{[}\PY{p}{]}\PY{p}{)}
+          \PY{n}{ax0}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZpc{} F}\PY{l+s+s1}{ractional Melting}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} TiO2 in Spinel \PYZsh{}\PYZsh{}\PYZsh{}}
+          
+          \PY{n}{ax1}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{Fm\PYZus{}lowCr}\PY{p}{,} \PY{n}{TiO2\PYZus{}lowCr}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{k}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{ax1}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{Fm\PYZus{}hiCr}\PY{p}{,} \PY{n}{TiO2\PYZus{}hiCr}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          \PY{n}{ax1}\PY{o}{.}\PY{n}{set\PYZus{}xlim}\PY{p}{(}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.1}\PY{p}{,}\PY{n}{xmax}\PY{p}{]}\PY{p}{)}
+          \PY{n}{ax1}\PY{o}{.}\PY{n}{set\PYZus{}ylim}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mf}{0.6}\PY{p}{]}\PY{p}{)}
+          \PY{n}{ax1}\PY{o}{.}\PY{n}{set\PYZus{}xticks}\PY{p}{(}\PY{p}{[}\PY{p}{]}\PY{p}{)}
+          \PY{n}{ax1}\PY{o}{.}\PY{n}{set\PYZus{}yticks}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mf}{0.1}\PY{p}{,}\PY{l+m+mf}{0.2}\PY{p}{,}\PY{l+m+mf}{0.3}\PY{p}{,}\PY{l+m+mf}{0.4}\PY{p}{,}\PY{l+m+mf}{0.5}\PY{p}{]}\PY{p}{)}
+          \PY{n}{ax1}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{ TiO\PYZdl{}\PYZus{}2\PYZdl{} in Spinel}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} Plagioclase \PYZsh{}\PYZsh{}\PYZsh{}}
+          
+          \PY{n}{ax2}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{Fm\PYZus{}lowCr}\PY{p}{,} \PY{n}{plag\PYZus{}lowCr}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{k}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{ax2}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{Fm\PYZus{}hiCr}\PY{p}{,} \PY{n}{plag\PYZus{}hiCr}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{ax2}\PY{o}{.}\PY{n}{axhline}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{linestyle}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{linewidth}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{silver}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{zorder}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+          \PY{n}{ax2}\PY{o}{.}\PY{n}{axhline}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{linestyle}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{linewidth}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{silver}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{zorder}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+          \PY{n}{ax2}\PY{o}{.}\PY{n}{axhline}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,} \PY{n}{linestyle}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{linewidth}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{silver}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{zorder}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+          \PY{n}{ax2}\PY{o}{.}\PY{n}{axhline}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{,} \PY{n}{linestyle}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{linewidth}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{silver}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{zorder}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+          \PY{n}{ax2}\PY{o}{.}\PY{n}{axhline}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{,} \PY{n}{linestyle}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{linewidth}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{silver}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{zorder}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+          
+          \PY{n}{ax2}\PY{o}{.}\PY{n}{set\PYZus{}xlim}\PY{p}{(}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.1}\PY{p}{,}\PY{n}{xmax}\PY{p}{]}\PY{p}{)}
+          \PY{n}{ax2}\PY{o}{.}\PY{n}{set\PYZus{}ylim}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{]}\PY{p}{)}
+          \PY{n}{ax2}\PY{o}{.}\PY{n}{set\PYZus{}xticks}\PY{p}{(}\PY{p}{[}\PY{p}{]}\PY{p}{)}
+          \PY{n}{ax2}\PY{o}{.}\PY{n}{set\PYZus{}yticks}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{]}\PY{p}{)}
+          \PY{n}{ax2}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Plagioclase}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} Cr\PYZsh{} \PYZsh{}\PYZsh{}\PYZsh{}}
+          
+          \PY{n}{ax3}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{Fm\PYZus{}lowCr}\PY{p}{,} \PY{n}{Cr\PYZus{}lowCr}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{k}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{ax3}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{Fm\PYZus{}hiCr}\PY{p}{,} \PY{n}{Cr\PYZus{}hiCr}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          \PY{n}{ax3}\PY{o}{.}\PY{n}{set\PYZus{}xlim}\PY{p}{(}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.1}\PY{p}{,}\PY{n}{xmax}\PY{p}{]}\PY{p}{)}
+          \PY{n}{ax3}\PY{o}{.}\PY{n}{set\PYZus{}ylim}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{60}\PY{p}{]}\PY{p}{)}
+          \PY{n}{ax3}\PY{o}{.}\PY{n}{set\PYZus{}xticks}\PY{p}{(}\PY{p}{[}\PY{p}{]}\PY{p}{)}
+          \PY{n}{ax3}\PY{o}{.}\PY{n}{set\PYZus{}yticks}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{20}\PY{p}{,}\PY{l+m+mi}{30}\PY{p}{,}\PY{l+m+mi}{40}\PY{p}{,}\PY{l+m+mi}{50}\PY{p}{,}\PY{l+m+mi}{60}\PY{p}{]}\PY{p}{)}
+          \PY{n}{ax3}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cr\PYZsh{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} fO2 \PYZsh{}\PYZsh{}\PYZsh{}}
+          
+          \PY{n}{ax4}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{Fm\PYZus{}lowCr}\PY{p}{,} \PY{n}{fO2\PYZus{}lowCr}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{k}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{ax4}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{Fm\PYZus{}hiCr}\PY{p}{,} \PY{n}{fO2\PYZus{}hiCr}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{ax4}\PY{o}{.}\PY{n}{axhline}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{linestyle}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{linewidth}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{k}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          \PY{n}{ax4}\PY{o}{.}\PY{n}{set\PYZus{}xlim}\PY{p}{(}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.1}\PY{p}{,}\PY{n}{xmax}\PY{p}{]}\PY{p}{)}
+          \PY{n}{ax4}\PY{o}{.}\PY{n}{set\PYZus{}ylim}\PY{p}{(}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}
+          \PY{n}{ax4}\PY{o}{.}\PY{n}{set\PYZus{}yticks}\PY{p}{(}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mf}{1.5}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.5}\PY{p}{,} \PY{l+m+mf}{0.5}\PY{p}{,} \PY{l+m+mf}{1.5}\PY{p}{]}\PY{p}{)}
+          \PY{n}{ax4}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{ Melt Addition}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{ax4}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{log(\PYZdl{}f\PYZus{}}\PY{l+s+si}{\PYZob{}O2\PYZcb{}}\PY{l+s+s1}{\PYZdl{}), \PYZdl{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{Delta\PYZdl{}QFM}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_19_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    The melt addition model also keeps track of the Cr\# evolution of the
+modeled peridotite as follows:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  During partial melting, Cr\# follows the empirical relationship
+  determined by Warren et al. (2016):
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \$ Cr\#\_\{residue\} = \frac{\exp(F-23)}{9} \$
+  \end{itemize}
+\item
+  During melt addition, Cr\# increases as the aluminum endmember of
+  spinel is removed to form plagioclase according to the reaction modes
+  of Borghini et al., 2010:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Olv: 1.98, Opx: -1.41, Cpx: -1.52, Spl: -1, Plg: 1.96
+  \end{itemize}
+\end{enumerate}
+
+The plot below shows the modeled evolution of Cr\# as degree of melt
+addition increases (panel b) in response to changes in the modes of
+plagioclase and spinel (panel a). The multiple black lines in each plot
+represent residual peridotites that have undergone varying degrees of
+partial melting prior to melt addition.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}173}]:} \PY{n}{MORB} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{olv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mi}{7}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{opx}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mi}{12}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cpx}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mi}{26}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{spl}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{plg}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mi}{45}\PY{p}{\PYZcb{}}
+          \PY{n}{rx7} \PY{o}{=} \PY{p}{[}\PY{l+m+mf}{0.0025}\PY{p}{,}\PY{l+m+mf}{0.002}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{]} \PY{c+c1}{\PYZsh{} not bad! nothing too crazy!}
+          
+          \PY{n}{melt\PYZus{}model\PYZus{}path}\PY{p}{(}\PY{n}{NMORB}\PY{p}{,} \PY{n}{MORB}\PY{p}{,} \PY{n}{subsolidus\PYZus{}reaction}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{spinel\PYZhy{}to\PYZhy{}plag}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ss\PYZus{}rxn\PYZus{}amt}\PY{o}{=}\PY{n}{rx7}\PY{p}{,} \PY{n}{plot\PYZus{}title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{speed}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fast}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_21_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    The plot below shows how the Cr\# predicted from the model compares to
+the measured Cr\# for each sample. Empty circles show the modeled Cr\#
+for the fractional melting part of the model, while the filled circles
+show fractional melting + melt addition, demonstrating the substantial
+increase in Cr\# as plagioclase removes Al from spinel.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}92}]:} \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+         \PY{n}{fig}\PY{o}{.}\PY{n}{set\PYZus{}size\PYZus{}inches}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{)}
+             
+         \PY{n}{ax0} \PY{o}{=} \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}axes}\PY{p}{(}\PY{p}{[}\PY{l+m+mf}{0.05}\PY{p}{,} \PY{l+m+mf}{0.1}\PY{p}{,} \PY{l+m+mf}{0.8}\PY{p}{,} \PY{l+m+mf}{0.8}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{} left, bottom, width, height (range 0 to 1)}
+         
+         \PY{n}{ax0}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{Cr\PYZus{}lowCr}\PY{p}{,} \PY{n}{Cr\PYZus{}res\PYZus{}lowCr}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{white}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{edgecolors}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gray}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Low Cr\PYZsh{}, melting only}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax0}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{Cr\PYZus{}lowCr}\PY{p}{,} \PY{n}{Cr\PYZus{}new\PYZus{}lowCr}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{k}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Low Cr\PYZsh{}, melting + melt addition}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax0}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{Cr\PYZus{}hiCr}\PY{p}{,} \PY{n}{Cr\PYZus{}res\PYZus{}hiCr}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{white}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{edgecolors}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{salmon}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{High Cr\PYZsh{}, melting only}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax0}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{Cr\PYZus{}hiCr}\PY{p}{,} \PY{n}{Cr\PYZus{}new\PYZus{}hiCr}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{High Cr\PYZsh{}, melting + melt addition}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}ax0.scatter(Cr\PYZus{}num[hi\PYZus{}Cr\PYZus{}low\PYZus{}fO2], melt\PYZus{}model\PYZus{}output[hi\PYZus{}Cr\PYZus{}low\PYZus{}fO2][:,2], color=\PYZsq{}b\PYZsq{})}
+         \PY{c+c1}{\PYZsh{}ax0.scatter(melt\PYZus{}model\PYZus{}output[no\PYZus{}cat][:,1], Cr\PYZus{}num[no\PYZus{}cat], color=\PYZsq{}purple\PYZsq{})}
+         
+         \PY{n}{ax0}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{60}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{60}\PY{p}{]}\PY{p}{,} \PY{n}{linestyle}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gray}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{zorder}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}ax1.scatter(Cr\PYZus{}global, TiO2\PYZus{}global, s=10, color=\PYZsq{}silver\PYZsq{})}
+         
+         \PY{c+c1}{\PYZsh{}ax0.set\PYZus{}xscale(\PYZsq{}log\PYZsq{})}
+         
+         \PY{n}{ax0}\PY{o}{.}\PY{n}{set\PYZus{}ylim}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{60}\PY{p}{]}\PY{p}{)}
+         \PY{n}{ax0}\PY{o}{.}\PY{n}{set\PYZus{}xlim}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{60}\PY{p}{]}\PY{p}{)}
+         \PY{n}{ax0}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cr\PYZsh{} actual}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax0}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cr\PYZsh{} modeled}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Shrink current axis\PYZsq{}s height by 10\PYZpc{} on the bottom}
+         \PY{n}{box} \PY{o}{=} \PY{n}{ax0}\PY{o}{.}\PY{n}{get\PYZus{}position}\PY{p}{(}\PY{p}{)}
+         \PY{n}{ax0}\PY{o}{.}\PY{n}{set\PYZus{}position}\PY{p}{(}\PY{p}{[}\PY{n}{box}\PY{o}{.}\PY{n}{x0}\PY{p}{,} \PY{n}{box}\PY{o}{.}\PY{n}{y0}\PY{p}{,}
+                          \PY{n}{box}\PY{o}{.}\PY{n}{width}\PY{p}{,} \PY{n}{box}\PY{o}{.}\PY{n}{height} \PY{o}{*} \PY{l+m+mf}{0.7}\PY{p}{]}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Put a legend below current axis}
+         \PY{n}{ax0}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{upper left}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{bbox\PYZus{}to\PYZus{}anchor}\PY{o}{=}\PY{p}{(}\PY{l+m+mf}{0.08}\PY{p}{,} \PY{l+m+mf}{1.36}\PY{p}{)}\PY{p}{,} \PY{c+c1}{\PYZsh{} adjust second number to move legend up or down}
+                   \PY{n}{fancybox}\PY{o}{=}\PY{k+kc}{False}\PY{p}{,} \PY{n}{shadow}\PY{o}{=}\PY{k+kc}{False}\PY{p}{,} \PY{n}{ncol}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_23_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    In all, the high-Cr\#, high-fO2 peridotites can be well explained by
+melt addition, which increases Cr\#, plagioclase content, and TiO\(_2\)
+in spinel.
+
+The effect of this melt addition on fO2 is less clear. The melt-added
+peridotites all lie to the upper end of the SWIR array, but there is no
+trend to higher fO2 as degree of melt addition increases, suggesting
+that any increase must happen quickly upon very small amounts of melt
+addition.
+
+    \hypertarget{modeling-of-swir-orthopyroxene-trace-element-samples}{%
+\subsubsection{Modeling of SWIR orthopyroxene trace element
+samples}\label{modeling-of-swir-orthopyroxene-trace-element-samples}}
+
+I then decided to apply the same melt model to the orthopyroxene, so
+that I could analyze the samples that did not have clinopyroxene present
+(especially the high Cr\#-low fO2 samples).
+
+(Note-- at the moment, I'm only plotting the low Cr\# samples that have
+both opx and cpx. NEed to create a category and plot low Cr\# samples
+that don't have cpx present.)
+
+The orthopyroxene in low Cr\# samples (black) and high Cr\# - high fO2
+samples (red) are shown modeled below.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}260}]:} \PY{n}{F\PYZus{}lowCr\PYZus{}opx}\PY{p}{,} \PY{n}{Fm\PYZus{}lowCr\PYZus{}opx}\PY{p}{,} \PY{n}{Cr\PYZus{}res\PYZus{}lowCr\PYZus{}opx}\PY{p}{,} \PY{n}{Cr\PYZus{}new\PYZus{}lowCr\PYZus{}opx} \PY{o}{=} \PY{n}{melt\PYZus{}model\PYZus{}opx}\PY{p}{(}\PY{n}{low\PYZus{}Cr\PYZus{}dicts\PYZus{}opx}\PY{p}{,} \PY{n}{NMORB}\PY{p}{,} \PY{n}{xtal\PYZus{}modes}\PY{o}{=}\PY{n}{MORB}\PY{p}{,} \PY{n}{normalization}\PY{o}{=}\PY{n}{PUM}\PY{p}{,} 
+                                      \PY{n}{method}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{custom1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{subsolidus\PYZus{}reaction} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{spinel\PYZhy{}to\PYZhy{}plag}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ss\PYZus{}rxn\PYZus{}amt}\PY{o}{=}\PY{n}{rx7}\PY{p}{,}
+                                              \PY{n}{group\PYZus{}color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{k}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{plot\PYZus{}title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Low Cr\PYZsh{} Samples (Opx)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                                  \PY{n}{output}\PY{o}{=}\PY{k+kc}{False}\PY{p}{,} \PY{n}{model\PYZus{}plot}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{individual}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{speed}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fast}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          \PY{n}{F\PYZus{}hiCr\PYZus{}opx}\PY{p}{,} \PY{n}{Fm\PYZus{}hiCr\PYZus{}opx}\PY{p}{,} \PY{n}{Cr\PYZus{}res\PYZus{}hiCr\PYZus{}opx}\PY{p}{,} \PY{n}{Cr\PYZus{}new\PYZus{}hiCr\PYZus{}opx} \PY{o}{=} \PY{n}{melt\PYZus{}model\PYZus{}opx}\PY{p}{(}\PY{n}{hi\PYZus{}Cr\PYZus{}hi\PYZus{}fO2\PYZus{}dicts\PYZus{}opx}\PY{p}{,} \PY{n}{NMORB}\PY{p}{,} \PY{n}{xtal\PYZus{}modes}\PY{o}{=}\PY{n}{MORB}\PY{p}{,} \PY{n}{normalization}\PY{o}{=}\PY{n}{PUM}\PY{p}{,} 
+                                                        \PY{n}{method}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{custom1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{subsolidus\PYZus{}reaction} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{spinel\PYZhy{}to\PYZhy{}plag}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ss\PYZus{}rxn\PYZus{}amt}\PY{o}{=}\PY{n}{rx7}\PY{p}{,}
+                                                               \PY{n}{group\PYZus{}color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{plot\PYZus{}title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{High Cr\PYZsh{} Samples (Opx)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                                                   \PY{n}{output}\PY{o}{=}\PY{k+kc}{False}\PY{p}{,} \PY{n}{model\PYZus{}plot}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{individual}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{speed}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fast}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_26_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_26_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    I then compare the modeled degree of fractional melting and melt
+addition as implied by both cpx and opx from the same sample. In
+general, the clinopyroxene and orthopyroxene trace element compositions
+return fairly similar melting parameters.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}239}]:} \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+          \PY{n}{fig}\PY{o}{.}\PY{n}{set\PYZus{}size\PYZus{}inches}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{)}
+              
+          \PY{n}{ax0} \PY{o}{=} \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}axes}\PY{p}{(}\PY{p}{[}\PY{l+m+mf}{0.05}\PY{p}{,} \PY{l+m+mf}{0.1}\PY{p}{,} \PY{l+m+mf}{0.4}\PY{p}{,} \PY{l+m+mf}{0.8}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{} left, bottom, width, height (range 0 to 1)}
+          \PY{n}{ax1} \PY{o}{=} \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}axes}\PY{p}{(}\PY{p}{[}\PY{l+m+mf}{0.55}\PY{p}{,} \PY{l+m+mf}{0.1}\PY{p}{,} \PY{l+m+mf}{0.4}\PY{p}{,} \PY{l+m+mf}{0.8}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{} left, bottom, width, height (range 0 to 1)}
+          
+          \PY{n}{ax0}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{F\PYZus{}lowCr}\PY{p}{,} \PY{n}{F\PYZus{}lowCr\PYZus{}opx}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{k}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{ax0}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{F\PYZus{}hiCr}\PY{p}{,} \PY{n}{F\PYZus{}hiCr\PYZus{}opx}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{ax0}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{15}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{15}\PY{p}{]}\PY{p}{,} \PY{n}{linestyle}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gray}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{zorder}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+          
+          \PY{n}{ax1}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{Fm\PYZus{}lowCr}\PY{p}{,} \PY{n}{Fm\PYZus{}lowCr\PYZus{}opx}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{k}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{ax1}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{Fm\PYZus{}hiCr}\PY{p}{,} \PY{n}{Fm\PYZus{}hiCr\PYZus{}opx}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{ax1}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{15}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{15}\PY{p}{]}\PY{p}{,} \PY{n}{linestyle}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gray}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{zorder}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+          
+          \PY{n}{ax0}\PY{o}{.}\PY{n}{set\PYZus{}xlim}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{15}\PY{p}{]}\PY{p}{)}
+          \PY{n}{ax0}\PY{o}{.}\PY{n}{set\PYZus{}ylim}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{15}\PY{p}{]}\PY{p}{)}
+          \PY{n}{ax0}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Fractional melting, cpx}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{ax0}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Fractional melting, opx}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          \PY{n}{ax1}\PY{o}{.}\PY{n}{set\PYZus{}xlim}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mf}{1.5}\PY{p}{]}\PY{p}{)}
+          \PY{n}{ax1}\PY{o}{.}\PY{n}{set\PYZus{}ylim}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mf}{1.5}\PY{p}{]}\PY{p}{)}
+          \PY{n}{ax1}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Melt addition, cpx}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{ax1}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Melt addition, opx}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_28_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Next, I look at the high Cr\# - low fO2 samples, which only have
+orthopyroxene present. The results are shown below. The first plot shows
+all the samples in this category, while the subsequent plots show each
+sample individually.
+
+In a lot of ways, these fits are actually better than I expected, though
+they are far from perfect. They do suggest larger degrees of melt
+extraction than the other categories (consistent with the lack of
+clinopyroxene), combined with a small to moderate degree of melt
+addition.
+
+However, if you output the new modes and the Cr\# of the spinel, you
+start to notice some wonky things. First, the Cr\#s are
+\textgreater{}100. Second, the cpx contents are negative. (Note that my
+melt modeling code only goes to cpx-out, even for orthopyroxene). What's
+happening here is that the spinel--\textgreater{}plagioclase reaction
+also consumes cpx. However, there's not enough cpx for it to consume, so
+it creates negative cpx, which is mathematically possible, if not
+geologically possible. Similarly, the spinel contents are so refractory
+that they have very little Al-endmember component left. The
+spinel--\textgreater{}plagioclase reaction thus creates negative
+Al-endmember so that it can suck Al into plagioclase. I need to add
+functionality that catches this and doesn't allow a component to go
+negative. If there isn't cpx to consume, what does the
+spinel--\textgreater{}plag reaction become? Where does it suck its Ca
+from? Could this be why these samples don't have plagioclase, even
+though they do seem to have undergone melt addition? Though some plag is
+just from the melt, not the spinel--\textgreater{}plag reaction. And
+melt should also crystallize in some plag. Hmmm.
+
+Is there some way this can relate to fO2?
+
+\emph{If} there is an fO2 increase for the high Cr\# high fO2 samples,
+it seems to happen immediately upon the first bits of melt addition. If
+there's no cpx initially to turn to plag, what happens? can I model the
+effect of Borghini's reaction on fO2, assuming Fe3+ all stays in spinel?
+I should be able to, right?
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}261}]:} \PY{n}{F\PYZus{}hiCrlowfO2\PYZus{}opx}\PY{p}{,} \PY{n}{Fm\PYZus{}hiCrlowfO2\PYZus{}opx}\PY{p}{,} \PY{n}{Cr\PYZus{}res\PYZus{}hiCrlowfO2\PYZus{}opx}\PY{p}{,} \PY{n}{Cr\PYZus{}new\PYZus{}hiCrlowfO2\PYZus{}opx} \PY{o}{=} \PY{n}{melt\PYZus{}model\PYZus{}opx}\PY{p}{(}\PY{n}{hi\PYZus{}Cr\PYZus{}low\PYZus{}fO2\PYZus{}dicts\PYZus{}opx}\PY{p}{,} \PY{n}{NMORB}\PY{p}{,} \PY{n}{xtal\PYZus{}modes}\PY{o}{=}\PY{n}{MORB}\PY{p}{,} \PY{n}{normalization}\PY{o}{=}\PY{n}{PUM}\PY{p}{,} 
+                                                        \PY{n}{method}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{custom1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{subsolidus\PYZus{}reaction} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{spinel\PYZhy{}to\PYZhy{}plag}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ss\PYZus{}rxn\PYZus{}amt}\PY{o}{=}\PY{n}{rx7}\PY{p}{,}
+                                                               \PY{n}{group\PYZus{}color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{plot\PYZus{}title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{High Cr\PYZsh{}, low fO2 Samples (Opx)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                                                   \PY{n}{output}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{model\PYZus{}plot}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{individual}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{speed}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fast}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          \PY{n}{s0} \PY{o}{=} \PY{n}{melt\PYZus{}model\PYZus{}opx}\PY{p}{(}\PY{p}{[}\PY{n}{hi\PYZus{}Cr\PYZus{}low\PYZus{}fO2\PYZus{}dicts\PYZus{}opx}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{n}{NMORB}\PY{p}{,} \PY{n}{xtal\PYZus{}modes}\PY{o}{=}\PY{n}{MORB}\PY{p}{,} \PY{n}{normalization}\PY{o}{=}\PY{n}{PUM}\PY{p}{,} 
+                                                        \PY{n}{method}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{custom1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{subsolidus\PYZus{}reaction} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{spinel\PYZhy{}to\PYZhy{}plag}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ss\PYZus{}rxn\PYZus{}amt}\PY{o}{=}\PY{n}{rx7}\PY{p}{,}
+                                                               \PY{n}{group\PYZus{}color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{plot\PYZus{}title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{High Cr\PYZsh{}, low fO2 Samples (Opx)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                                                   \PY{n}{output}\PY{o}{=}\PY{k+kc}{False}\PY{p}{,} \PY{n}{model\PYZus{}plot}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{individual}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{speed}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fast}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          \PY{n}{s1} \PY{o}{=} \PY{n}{melt\PYZus{}model\PYZus{}opx}\PY{p}{(}\PY{p}{[}\PY{n}{hi\PYZus{}Cr\PYZus{}low\PYZus{}fO2\PYZus{}dicts\PYZus{}opx}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{n}{NMORB}\PY{p}{,} \PY{n}{xtal\PYZus{}modes}\PY{o}{=}\PY{n}{MORB}\PY{p}{,} \PY{n}{normalization}\PY{o}{=}\PY{n}{PUM}\PY{p}{,} 
+                                                        \PY{n}{method}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{custom1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{subsolidus\PYZus{}reaction} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{spinel\PYZhy{}to\PYZhy{}plag}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ss\PYZus{}rxn\PYZus{}amt}\PY{o}{=}\PY{n}{rx7}\PY{p}{,}
+                                                               \PY{n}{group\PYZus{}color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{plot\PYZus{}title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{High Cr\PYZsh{}, low fO2 Samples (Opx)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                                                   \PY{n}{output}\PY{o}{=}\PY{k+kc}{False}\PY{p}{,} \PY{n}{model\PYZus{}plot}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{individual}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{speed}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fast}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          \PY{n}{s2} \PY{o}{=} \PY{n}{melt\PYZus{}model\PYZus{}opx}\PY{p}{(}\PY{p}{[}\PY{n}{hi\PYZus{}Cr\PYZus{}low\PYZus{}fO2\PYZus{}dicts\PYZus{}opx}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{n}{NMORB}\PY{p}{,} \PY{n}{xtal\PYZus{}modes}\PY{o}{=}\PY{n}{MORB}\PY{p}{,} \PY{n}{normalization}\PY{o}{=}\PY{n}{PUM}\PY{p}{,} 
+                                                        \PY{n}{method}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{custom1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{subsolidus\PYZus{}reaction} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{spinel\PYZhy{}to\PYZhy{}plag}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ss\PYZus{}rxn\PYZus{}amt}\PY{o}{=}\PY{n}{rx7}\PY{p}{,}
+                                                               \PY{n}{group\PYZus{}color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{plot\PYZus{}title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{High Cr\PYZsh{}, low fO2 Samples (Opx)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                                                   \PY{n}{output}\PY{o}{=}\PY{k+kc}{False}\PY{p}{,} \PY{n}{model\PYZus{}plot}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{individual}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{speed}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fast}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          \PY{n}{s3} \PY{o}{=} \PY{n}{melt\PYZus{}model\PYZus{}opx}\PY{p}{(}\PY{p}{[}\PY{n}{hi\PYZus{}Cr\PYZus{}low\PYZus{}fO2\PYZus{}dicts\PYZus{}opx}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{n}{NMORB}\PY{p}{,} \PY{n}{xtal\PYZus{}modes}\PY{o}{=}\PY{n}{MORB}\PY{p}{,} \PY{n}{normalization}\PY{o}{=}\PY{n}{PUM}\PY{p}{,} 
+                                                        \PY{n}{method}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{custom1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{subsolidus\PYZus{}reaction} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{spinel\PYZhy{}to\PYZhy{}plag}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ss\PYZus{}rxn\PYZus{}amt}\PY{o}{=}\PY{n}{rx7}\PY{p}{,}
+                                                               \PY{n}{group\PYZus{}color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{plot\PYZus{}title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{High Cr\PYZsh{}, low fO2 Samples (Opx)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                                                   \PY{n}{output}\PY{o}{=}\PY{k+kc}{False}\PY{p}{,} \PY{n}{model\PYZus{}plot}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{individual}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{speed}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fast}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Melting: 17.3\%
+Melt Addition: 0.080\%
+Chi Squared: 3.37363
+Original Modes:  \{'olv': 0.7571948076969391, 'opx': 0.22050429882233946, 'cpx': 0.006550586421982999, 'spl': 0.015750307058738533, 'plg': 0.0\}
+New Modes:  \{'olv': 0.7714868519701343, 'opx': 0.20986817325366594, 'cpx': -0.004615536012460794, 'spl': 0.008253436578542201, 'plg': 0.01508200482455187\}
+Original Cr\#: 53.1
+New Cr\#: 120.5
+Melting: 17.9\%
+Melt Addition: 0.070\%
+Chi Squared: 5.20737
+Original Modes:  \{'olv': 0.7650682771835359, 'opx': 0.2180018918722259, 'cpx': 0.0013582672390793009, 'spl': 0.015571563705158992, 'plg': 0.0\}
+New Modes:  \{'olv': 0.7788398111746687, 'opx': 0.20779156680580163, 'cpx': -0.009384561406371431, 'spl': 0.008369752064058099, 'plg': 0.014455417400385041\}
+Original Cr\#: 56.7
+New Cr\#: 125.9
+Melting: 13.0\%
+Melt Addition: 0.600\%
+Chi Squared: 2.45379
+Original Modes:  \{'olv': 0.7038734815493926, 'opx': 0.237451294980518, 'cpx': 0.04171441668576668, 'spl': 0.016960806784322713, 'plg': 0.0\}
+New Modes:  \{'olv': 0.7244206047492926, 'opx': 0.21950696563063277, 'cpx': 0.02451709521607921, 'spl': 0.004647791349117565, 'plg': 0.027030314901482194\}
+Original Cr\#: 32.9
+New Cr\#: 168.8
+Melting: 13.4\%
+Melt Addition: 0.200\%
+Chi Squared: 1.83538
+Original Modes:  \{'olv': 0.7086153704471152, 'opx': 0.23594419118662802, 'cpx': 0.038587281852926286, 'spl': 0.01685315651333057, 'plg': 0.0\}
+New Modes:  \{'olv': 0.726382371926798, 'opx': 0.22218409747501597, 'cpx': 0.024472350597299998, 'spl': 0.0072301221279733735, 'plg': 0.01982717093385576\}
+Original Cr\#: 34.4
+New Cr\#: 94.5
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_30_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_30_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_30_3.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_30_4.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_30_5.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}267}]:} \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+          \PY{n}{fig}\PY{o}{.}\PY{n}{set\PYZus{}size\PYZus{}inches}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{)}
+              
+          \PY{n}{ax0} \PY{o}{=} \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}axes}\PY{p}{(}\PY{p}{[}\PY{l+m+mf}{0.05}\PY{p}{,} \PY{l+m+mf}{0.1}\PY{p}{,} \PY{l+m+mf}{0.8}\PY{p}{,} \PY{l+m+mf}{0.8}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{} left, bottom, width, height (range 0 to 1)}
+          
+          \PY{n}{ax0}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{Cr\PYZus{}hiCrlowfO2\PYZus{}opx}\PY{p}{,} \PY{n}{Cr\PYZus{}res\PYZus{}hiCrlowfO2\PYZus{}opx}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{white}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{edgecolors}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cornflowerblue}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Low Cr\PYZsh{}, melting only}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{ax0}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{Cr\PYZus{}hiCrlowfO2\PYZus{}opx}\PY{p}{,} \PY{n}{Cr\PYZus{}new\PYZus{}hiCrlowfO2\PYZus{}opx}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{blue}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Low Cr\PYZsh{}, melting + melt addition}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{}ax0.scatter(Cr\PYZus{}num[hi\PYZus{}Cr\PYZus{}low\PYZus{}fO2], melt\PYZus{}model\PYZus{}output[hi\PYZus{}Cr\PYZus{}low\PYZus{}fO2][:,2], color=\PYZsq{}b\PYZsq{})}
+          \PY{c+c1}{\PYZsh{}ax0.scatter(melt\PYZus{}model\PYZus{}output[no\PYZus{}cat][:,1], Cr\PYZus{}num[no\PYZus{}cat], color=\PYZsq{}purple\PYZsq{})}
+          
+          \PY{n}{ax0}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{60}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{60}\PY{p}{]}\PY{p}{,} \PY{n}{linestyle}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gray}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{zorder}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{}ax1.scatter(Cr\PYZus{}global, TiO2\PYZus{}global, s=10, color=\PYZsq{}silver\PYZsq{})}
+          
+          \PY{c+c1}{\PYZsh{}ax0.set\PYZus{}xscale(\PYZsq{}log\PYZsq{})}
+          
+          \PY{n}{ax0}\PY{o}{.}\PY{n}{set\PYZus{}ylim}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{200}\PY{p}{]}\PY{p}{)}
+          \PY{n}{ax0}\PY{o}{.}\PY{n}{set\PYZus{}xlim}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{60}\PY{p}{]}\PY{p}{)}
+          \PY{n}{ax0}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cr\PYZsh{} actual}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{ax0}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cr\PYZsh{} modeled}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} Shrink current axis\PYZsq{}s height by 10\PYZpc{} on the bottom}
+          \PY{n}{box} \PY{o}{=} \PY{n}{ax0}\PY{o}{.}\PY{n}{get\PYZus{}position}\PY{p}{(}\PY{p}{)}
+          \PY{n}{ax0}\PY{o}{.}\PY{n}{set\PYZus{}position}\PY{p}{(}\PY{p}{[}\PY{n}{box}\PY{o}{.}\PY{n}{x0}\PY{p}{,} \PY{n}{box}\PY{o}{.}\PY{n}{y0}\PY{p}{,}
+                           \PY{n}{box}\PY{o}{.}\PY{n}{width}\PY{p}{,} \PY{n}{box}\PY{o}{.}\PY{n}{height} \PY{o}{*} \PY{l+m+mf}{0.7}\PY{p}{]}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} Put a legend below current axis}
+          \PY{n}{ax0}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{upper left}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{bbox\PYZus{}to\PYZus{}anchor}\PY{o}{=}\PY{p}{(}\PY{l+m+mf}{0.08}\PY{p}{,} \PY{l+m+mf}{1.36}\PY{p}{)}\PY{p}{,} \PY{c+c1}{\PYZsh{} adjust second number to move legend up or down}
+                    \PY{n}{fancybox}\PY{o}{=}\PY{k+kc}{False}\PY{p}{,} \PY{n}{shadow}\PY{o}{=}\PY{k+kc}{False}\PY{p}{,} \PY{n}{ncol}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+          
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_31_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{below-this-are-hidden-calculation-cells}{%
+\section{Below this are hidden calculation
+cells}\label{below-this-are-hidden-calculation-cells}}
+
+\hypertarget{run-these-first}{%
+\subsection{(Run these first)}\label{run-these-first}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}255}]:} \PY{c+c1}{\PYZsh{}\PYZsh{} Getting data needed to make plots \PYZsh{}\PYZsh{}}
+          
+          \PY{c+c1}{\PYZsh{} Import statements}
+          \PY{o}{\PYZpc{}}\PY{k}{run} imports\PYZus{}and\PYZus{}settings.ipynb
+          \PY{c+c1}{\PYZsh{} Data loading function}
+          \PY{o}{\PYZpc{}}\PY{k}{run} load\PYZus{}data.ipynb
+          \PY{c+c1}{\PYZsh{} Data plotting function (all major element variables and fO2)}
+          \PY{o}{\PYZpc{}}\PY{k}{run} fO2\PYZus{}plot.ipynb
+          \PY{c+c1}{\PYZsh{} Trace element functions}
+          \PY{o}{\PYZpc{}}\PY{k}{run} trace\PYZus{}element\PYZus{}functions.ipynb
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+load\_data.ipynb:7: FutureWarning: Method .as\_matrix will be removed in a future version. Use .values instead.
+  "outputs": [],
+load\_data.ipynb:8: FutureWarning: Method .as\_matrix will be removed in a future version. Use .values instead.
+  "source": [
+load\_data.ipynb:9: FutureWarning: Method .as\_matrix will be removed in a future version. Use .values instead.
+  "\#\# Import statements\textbackslash{}n",
+load\_data.ipynb:10: FutureWarning: Method .as\_matrix will be removed in a future version. Use .values instead.
+  "\textbackslash{}n",
+load\_data.ipynb:11: FutureWarning: Method .as\_matrix will be removed in a future version. Use .values instead.
+  "import pandas as pd\textbackslash{}n",
+load\_data.ipynb:12: FutureWarning: Method .as\_matrix will be removed in a future version. Use .values instead.
+  "import numpy as np"
+load\_data.ipynb:53: FutureWarning: Method .as\_matrix will be removed in a future version. Use .values instead.
+  "\textbackslash{}n",
+load\_data.ipynb:36: FutureWarning: Method .as\_matrix will be removed in a future version. Use .values instead.
+  "/Applications/anaconda/lib/python3.6/site-packages/ipykernel\_launcher.py:53: FutureWarning: Method .as\_matrix will be removed in a future version. Use .values instead.\textbackslash{}n"
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Melt model collapsed here
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}181}]:} \PY{c+c1}{\PYZsh{} Adjust SWIR peridotites to normalize to constant MgO values, because I don\PYZsq{}t have real values yet.}
+          \PY{c+c1}{\PYZsh{} Real data will go in here.}
+          
+          \PY{n}{cpx\PYZus{}adjusted\PYZus{}dicts} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+          \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{trace\PYZus{}dict} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{cpx\PYZus{}trace\PYZus{}dicts}\PY{p}{)}\PY{p}{:}
+              \PY{n}{cpx\PYZus{}adjusted\PYZus{}dicts}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{MgO\PYZus{}adjust}\PY{p}{(}\PY{n}{trace\PYZus{}dict}\PY{p}{,}\PY{l+m+mi}{18}\PY{p}{)}\PY{p}{)}
+              
+          \PY{n}{opx\PYZus{}adjusted\PYZus{}dicts} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+          \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{trace\PYZus{}dict} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{opx\PYZus{}trace\PYZus{}dicts}\PY{p}{)}\PY{p}{:}
+              \PY{n}{opx\PYZus{}adjusted\PYZus{}dicts}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{MgO\PYZus{}adjust}\PY{p}{(}\PY{n}{trace\PYZus{}dict}\PY{p}{,}\PY{l+m+mi}{33}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}182}]:} \PY{c+c1}{\PYZsh{} First, define some useful parameters}
+          
+          \PY{c+c1}{\PYZsh{} SWIR}
+          \PY{n}{Cr\PYZus{}num} \PY{o}{=} \PY{n}{SW}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{D}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cr\PYZsh{} (spl)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}
+          \PY{n}{TiO2} \PY{o}{=} \PY{n}{SW}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{D}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{wt}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{ TiO\PYZdl{}\PYZus{}2\PYZdl{} (spl)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}
+          \PY{n}{fO2} \PY{o}{=} \PY{n}{SW}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{D}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}log(f\PYZus{}}\PY{l+s+si}{\PYZob{}O2\PYZcb{}}\PY{l+s+s1}{)\PYZdl{}, \PYZdl{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{Delta\PYZdl{}QFM}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}
+          \PY{n}{plag\PYZus{}score} \PY{o}{=} \PY{n}{SW}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{D}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{plag}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}
+          \PY{n}{trace} \PY{o}{=} \PY{n}{SW}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{D}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{trace}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}
+          \PY{n}{La\PYZus{}N} \PY{o}{=} \PY{n}{get\PYZus{}elem}\PY{p}{(}\PY{n}{cpx\PYZus{}adjusted\PYZus{}dicts}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{La}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{/}\PY{n}{chon}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{La}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n}{Yb\PYZus{}N} \PY{o}{=} \PY{n}{get\PYZus{}elem}\PY{p}{(}\PY{n}{cpx\PYZus{}adjusted\PYZus{}dicts}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Yb}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{/}\PY{n}{chon}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Yb}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n}{Yb} \PY{o}{=} \PY{n}{get\PYZus{}elem}\PY{p}{(}\PY{n}{cpx\PYZus{}adjusted\PYZus{}dicts}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Yb}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} SWIR Van78 plag samples}
+          \PY{n}{Cr\PYZus{}num\PYZus{}SWplag} \PY{o}{=} \PY{n}{SW78}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{D}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cr\PYZsh{} (spl)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}
+          \PY{n}{TiO2\PYZus{}SWplag} \PY{o}{=} \PY{n}{SW78}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{D}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{wt}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{ TiO\PYZdl{}\PYZus{}2\PYZdl{} (spl)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}
+          \PY{n}{fO2\PYZus{}SWplag} \PY{o}{=} \PY{n}{SW78}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{D}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}log(f\PYZus{}}\PY{l+s+si}{\PYZob{}O2\PYZcb{}}\PY{l+s+s1}{)\PYZdl{}, \PYZdl{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{Delta\PYZdl{}QFM}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}
+          \PY{n}{plag\PYZus{}score\PYZus{}SWplag} \PY{o}{=} \PY{n}{SW78}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{D}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{plag}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}
+          \PY{n}{trace\PYZus{}SWplag} \PY{o}{=} \PY{n}{SW78}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{D}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{trace}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}
+          \PY{n}{La\PYZus{}N\PYZus{}SWplag} \PY{o}{=} \PY{n}{get\PYZus{}elem}\PY{p}{(}\PY{n}{cpx\PYZus{}trace\PYZus{}dicts\PYZus{}SWplag}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{La}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{/}\PY{n}{chon}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{La}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n}{Yb\PYZus{}N\PYZus{}SWplag} \PY{o}{=} \PY{n}{get\PYZus{}elem}\PY{p}{(}\PY{n}{cpx\PYZus{}trace\PYZus{}dicts\PYZus{}SWplag}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Yb}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{/}\PY{n}{chon}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Yb}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n}{Yb\PYZus{}SWplag} \PY{o}{=} \PY{n}{get\PYZus{}elem}\PY{p}{(}\PY{n}{cpx\PYZus{}trace\PYZus{}dicts\PYZus{}SWplag}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Yb}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}183}]:} \PY{c+c1}{\PYZsh{} Categorize SWIR peridotites}
+          \PY{n}{low\PYZus{}Cr} \PY{o}{=} \PY{n}{Cr\PYZus{}num}\PY{o}{\PYZlt{}}\PY{l+m+mi}{30}
+          \PY{n}{hi\PYZus{}Cr\PYZus{}hi\PYZus{}fO2} \PY{o}{=} \PY{p}{(}\PY{n}{Cr\PYZus{}num}\PY{o}{\PYZgt{}}\PY{l+m+mi}{30}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{fO2}\PY{o}{\PYZgt{}}\PY{l+m+mf}{0.7}\PY{p}{)}
+          \PY{n}{hi\PYZus{}Cr\PYZus{}low\PYZus{}fO2} \PY{o}{=} \PY{p}{(}\PY{n}{Cr\PYZus{}num}\PY{o}{\PYZgt{}}\PY{l+m+mi}{30}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{fO2}\PY{o}{\PYZlt{}}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.2}\PY{p}{)}
+          \PY{n}{no\PYZus{}cat} \PY{o}{=} \PY{p}{(}\PY{n}{Cr\PYZus{}num}\PY{o}{\PYZgt{}}\PY{l+m+mi}{30}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{fO2}\PY{o}{\PYZgt{}}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.2}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{fO2}\PY{o}{\PYZlt{}}\PY{l+m+mf}{0.7}\PY{p}{)} 
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}259}]:} \PY{c+c1}{\PYZsh{} Create lists of dictionaries for each trace element category}
+          \PY{c+c1}{\PYZsh{} (Because you can\PYZsq{}t use list comprehension on the overall list)}
+          
+          \PY{n}{cpx\PYZus{}trace} \PY{o}{=} \PY{n}{SW}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{D}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cpx\PYZus{}trace}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}
+          \PY{n}{opx\PYZus{}trace} \PY{o}{=} \PY{n}{SW}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{D}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{opx\PYZus{}trace}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}
+          
+          \PY{c+c1}{\PYZsh{} Create list of Low Cr\PYZsh{} trace dictionaries}
+          \PY{n}{low\PYZus{}Cr\PYZus{}dicts} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+          \PY{n}{low\PYZus{}Cr\PYZus{}dicts\PYZus{}opx} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+          \PY{k}{for} \PY{n}{idx} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{low\PYZus{}Cr}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+              \PY{k}{if} \PY{p}{(}\PY{n}{cpx\PYZus{}trace}\PY{p}{[}\PY{n}{idx}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{)} \PY{o+ow}{and} \PY{p}{(}\PY{n}{low\PYZus{}Cr}\PY{p}{[}\PY{n}{idx}\PY{p}{]} \PY{o}{==} \PY{k+kc}{True}\PY{p}{)}\PY{p}{:}
+                  \PY{n}{low\PYZus{}Cr\PYZus{}dicts}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{cpx\PYZus{}adjusted\PYZus{}dicts}\PY{p}{[}\PY{n}{idx}\PY{p}{]}\PY{p}{)}
+                  \PY{n}{low\PYZus{}Cr\PYZus{}dicts\PYZus{}opx}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{opx\PYZus{}adjusted\PYZus{}dicts}\PY{p}{[}\PY{n}{idx}\PY{p}{]}\PY{p}{)}
+                  
+          \PY{c+c1}{\PYZsh{} Create list of High Cr\PYZsh{}, High fO2 trace dictionaries}
+          \PY{n}{hi\PYZus{}Cr\PYZus{}hi\PYZus{}fO2\PYZus{}dicts} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+          \PY{n}{hi\PYZus{}Cr\PYZus{}hi\PYZus{}fO2\PYZus{}dicts\PYZus{}opx} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+          \PY{k}{for} \PY{n}{idx} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{hi\PYZus{}Cr\PYZus{}hi\PYZus{}fO2}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+              \PY{k}{if} \PY{p}{(}\PY{n}{cpx\PYZus{}trace}\PY{p}{[}\PY{n}{idx}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{)} \PY{o+ow}{and} \PY{p}{(}\PY{n}{hi\PYZus{}Cr\PYZus{}hi\PYZus{}fO2}\PY{p}{[}\PY{n}{idx}\PY{p}{]} \PY{o}{==} \PY{k+kc}{True}\PY{p}{)}\PY{p}{:}
+                  \PY{n}{hi\PYZus{}Cr\PYZus{}hi\PYZus{}fO2\PYZus{}dicts}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{cpx\PYZus{}adjusted\PYZus{}dicts}\PY{p}{[}\PY{n}{idx}\PY{p}{]}\PY{p}{)}
+                  \PY{n}{hi\PYZus{}Cr\PYZus{}hi\PYZus{}fO2\PYZus{}dicts\PYZus{}opx}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{opx\PYZus{}adjusted\PYZus{}dicts}\PY{p}{[}\PY{n}{idx}\PY{p}{]}\PY{p}{)}
+                  
+          \PY{n}{hi\PYZus{}Cr\PYZus{}low\PYZus{}fO2\PYZus{}dicts\PYZus{}opx} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+          \PY{k}{for} \PY{n}{idx} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{hi\PYZus{}Cr\PYZus{}low\PYZus{}fO2}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+              \PY{k}{if} \PY{p}{(}\PY{n}{opx\PYZus{}trace}\PY{p}{[}\PY{n}{idx}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{)} \PY{o+ow}{and} \PY{p}{(}\PY{n}{hi\PYZus{}Cr\PYZus{}low\PYZus{}fO2}\PY{p}{[}\PY{n}{idx}\PY{p}{]} \PY{o}{==} \PY{k+kc}{True}\PY{p}{)}\PY{p}{:}
+                  \PY{n}{hi\PYZus{}Cr\PYZus{}low\PYZus{}fO2\PYZus{}dicts\PYZus{}opx}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{opx\PYZus{}adjusted\PYZus{}dicts}\PY{p}{[}\PY{n}{idx}\PY{p}{]}\PY{p}{)}
+                  
+          \PY{c+c1}{\PYZsh{} Create list of SWIR Van78 trace dictionaries}
+          \PY{n}{SWIR\PYZus{}Van78} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+          \PY{k}{for} \PY{n}{idx} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{trace\PYZus{}SWplag}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+              \PY{k}{if} \PY{p}{(}\PY{n}{trace\PYZus{}SWplag}\PY{p}{[}\PY{n}{idx}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+                  \PY{n}{SWIR\PYZus{}Van78}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{cpx\PYZus{}trace\PYZus{}dicts\PYZus{}SWplag}\PY{p}{[}\PY{n}{idx}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}263}]:} \PY{c+c1}{\PYZsh{} Pull out parameters for cpx trace element samples of each type}
+          
+          \PY{n}{TiO2\PYZus{}lowCr} \PY{o}{=} \PY{n}{TiO2}\PY{p}{[}\PY{n}{low\PYZus{}Cr} \PY{o}{\PYZam{}} \PY{n}{cpx\PYZus{}trace}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{bool}\PY{p}{)}\PY{p}{]}
+          \PY{n}{TiO2\PYZus{}hiCr} \PY{o}{=} \PY{n}{TiO2}\PY{p}{[}\PY{n}{hi\PYZus{}Cr\PYZus{}hi\PYZus{}fO2} \PY{o}{\PYZam{}} \PY{n}{cpx\PYZus{}trace}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{bool}\PY{p}{)}\PY{p}{]}
+          
+          \PY{n}{plag\PYZus{}lowCr} \PY{o}{=} \PY{n}{plag\PYZus{}score}\PY{p}{[}\PY{n}{low\PYZus{}Cr} \PY{o}{\PYZam{}} \PY{n}{cpx\PYZus{}trace}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{bool}\PY{p}{)}\PY{p}{]}
+          \PY{n}{plag\PYZus{}hiCr} \PY{o}{=} \PY{n}{plag\PYZus{}score}\PY{p}{[}\PY{n}{hi\PYZus{}Cr\PYZus{}hi\PYZus{}fO2} \PY{o}{\PYZam{}} \PY{n}{cpx\PYZus{}trace}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{bool}\PY{p}{)}\PY{p}{]}
+          
+          \PY{n}{Cr\PYZus{}lowCr} \PY{o}{=} \PY{n}{Cr\PYZus{}num}\PY{p}{[}\PY{n}{low\PYZus{}Cr} \PY{o}{\PYZam{}} \PY{n}{cpx\PYZus{}trace}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{bool}\PY{p}{)}\PY{p}{]}
+          \PY{n}{Cr\PYZus{}hiCr} \PY{o}{=} \PY{n}{Cr\PYZus{}num}\PY{p}{[}\PY{n}{hi\PYZus{}Cr\PYZus{}hi\PYZus{}fO2} \PY{o}{\PYZam{}} \PY{n}{cpx\PYZus{}trace}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{bool}\PY{p}{)}\PY{p}{]}
+          
+          \PY{n}{Cr\PYZus{}hiCrlowfO2\PYZus{}opx} \PY{o}{=} \PY{n}{Cr\PYZus{}num}\PY{p}{[}\PY{n}{hi\PYZus{}Cr\PYZus{}low\PYZus{}fO2} \PY{o}{\PYZam{}} \PY{n}{opx\PYZus{}trace}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{bool}\PY{p}{)}\PY{p}{]}
+          
+          \PY{n}{fO2\PYZus{}lowCr} \PY{o}{=} \PY{n}{fO2}\PY{p}{[}\PY{n}{low\PYZus{}Cr} \PY{o}{\PYZam{}} \PY{n}{cpx\PYZus{}trace}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{bool}\PY{p}{)}\PY{p}{]}
+          \PY{n}{fO2\PYZus{}hiCr} \PY{o}{=} \PY{n}{fO2}\PY{p}{[}\PY{n}{hi\PYZus{}Cr\PYZus{}hi\PYZus{}fO2} \PY{o}{\PYZam{}} \PY{n}{cpx\PYZus{}trace}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{bool}\PY{p}{)}\PY{p}{]}
+\end{Verbatim}
+
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
